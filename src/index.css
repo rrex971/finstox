@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Switzer";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Switzer-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Clash Display";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/ClashDisplay-Variable.ttf");
+}
+@font-face {
+  font-family: "Chillax";
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/Chillax-Variable.ttf");
+}
+
+@theme {
+  --font-body: "Switzer", sans-serif;
+  --font-head: "Clash Display";
+  --font-logo: "Chillax";
+
+  --background-image-main: url('background.svg');
+
+  --color-mercury-50: #f7f7f7;
+  --color-mercury-100: #ededed;
+  --color-mercury-200: #e0e0e0;
+  --color-mercury-300: #c8c8c8;
+  --color-mercury-400: #adadad;
+  --color-mercury-500: #999999;
+  --color-mercury-600: #888888;
+  --color-mercury-700: #7b7b7b;
+  --color-mercury-800: #676767;
+  --color-mercury-900: #545454;
+  --color-mercury-950: #363636;
+
+  --color-woodsmoke-50: #f6f6f6;
+  --color-woodsmoke-100: #e7e7e7;
+  --color-woodsmoke-200: #d1d1d1;
+  --color-woodsmoke-300: #b0b0b0;
+  --color-woodsmoke-400: #888888;
+  --color-woodsmoke-500: #6d6d6d;
+  --color-woodsmoke-600: #5d5d5d;
+  --color-woodsmoke-700: #4f4f4f;
+  --color-woodsmoke-800: #454545;
+  --color-woodsmoke-900: #1c1c1c;
+  --color-woodsmoke-950: #181818;
+
+  --color-magenta-/-fuchsia-50: #fef4ff;
+  --color-magenta-/-fuchsia-100: #fbe8ff;
+  --color-magenta-/-fuchsia-200: #f7d0fe;
+  --color-magenta-/-fuchsia-300: #f3acfb;
+  --color-magenta-/-fuchsia-400: #ed7af8;
+  --color-magenta-/-fuchsia-500: #e14dee;
+  --color-magenta-/-fuchsia-600: #c728d1;
+  --color-magenta-/-fuchsia-700: #a81dae;
+  --color-magenta-/-fuchsia-800: #8b1a8e;
+  --color-magenta-/-fuchsia-900: #731b74;
+  --color-magenta-/-fuchsia-950: #4d054d;
+
+  --color-san-marino-50: #f4f6fb;
+  --color-san-marino-100: #e7ecf7;
+  --color-san-marino-200: #cad7ed;
+  --color-san-marino-300: #9bb5de;
+  --color-san-marino-400: #658fcb;
+  --color-san-marino-500: #3f6caf;
+  --color-san-marino-600: #305799;
+  --color-san-marino-700: #28467c;
+  --color-san-marino-800: #253d67;
+  --color-san-marino-900: #233557;
+  --color-san-marino-950: #17223a;
+
+}
