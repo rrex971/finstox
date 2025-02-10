@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './screens/Home'
 import SearchResults from './screens/SearchResults';
 import NotFound from './screens/NotFound';
+import Footer from './components/Footer';
 import { AnimatePresence } from 'framer-motion';
 
 
@@ -19,8 +20,7 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
-        <footer>
-        </footer>
+        <Footer className="absolute bottom-0 left-0"/>
       </div>
   );
 };
