@@ -21,7 +21,7 @@
 }
 
 @theme {
-  --font-body: "Switzer", sans-serif;
+  --font-body: "Switzer";
   --font-head: "Clash Display";
   --font-logo: "Chillax";
 
@@ -74,5 +74,33 @@
   --color-san-marino-800: #253d67;
   --color-san-marino-900: #233557;
   --color-san-marino-950: #17223a;
+
+  --color-emerald-50: #f0fdf5;
+  --color-emerald-100: #dcfcea;
+  --color-emerald-200: #bcf6d6;
+  --color-emerald-300: #88edb6;
+  --color-emerald-400: #52dd92;
+  --color-emerald-500: #24c36e;
+  --color-emerald-600: #18a158;
+  --color-emerald-700: #177e47;
+  --color-emerald-800: #17643b;
+  --color-emerald-900: #155233;
+  --color-emerald-950: #062d1a;
+
+  --color-amaranth-50: #fff1f2;
+  --color-amaranth-100: #ffe4e7;
+  --color-amaranth-200: #ffccd4;
+  --color-amaranth-300: #fea3b0;
+  --color-amaranth-400: #fc7087;
+  --color-amaranth-500: #f63d61;
+  --color-amaranth-600: #e52453;
+  --color-amaranth-700: #c0103f;
+  --color-amaranth-800: #a0113b;
+  --color-amaranth-900: #89123a;
+  --color-amaranth-950: #4d041b;
+
+
+
+
 
 }

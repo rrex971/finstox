@@ -3,6 +3,8 @@ import { Routes, Route, useLocation } from 'react-router';
 import Navbar from './components/Navbar';
 import Home from './screens/Home'
 import SearchResults from './screens/SearchResults';
+import Explore from './screens/Explore';
+import Stock from './screens/Stock';
 import NotFound from './screens/NotFound';
 import Footer from './components/Footer';
 import { AnimatePresence } from 'framer-motion';
@@ -17,6 +19,8 @@ const App = () => {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/stock" element={<Stock />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
