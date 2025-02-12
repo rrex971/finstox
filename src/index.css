@@ -25,7 +25,7 @@
   --font-head: "Clash Display";
   --font-logo: "Chillax";
 
-  --background-image-main: url('background.svg');
+  --background-image-main: url('/public/background.svg');
 
   --color-mercury-50: #f7f7f7;
   --color-mercury-100: #ededed;
