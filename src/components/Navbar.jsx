@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 
 const Navbar = () => {
     return (
-    <nav className="bg-woodsmoke-900 bg-cover font-body p-4 md:p-5">
+    <nav className="bg-woodsmoke-900 bg-cover border-b-1 border-woodsmoke-600  font-body p-4 md:p-5">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="flex justify-between items-center w-full md:w-auto">
           <div className="text-mercury-200 text-lg md:text-4xl font-logo font-normal">

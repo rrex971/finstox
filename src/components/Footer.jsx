@@ -5,7 +5,7 @@ const Footer = () => {
 
     return (
     <footer>
-        <div className="bg-woodsmoke-900 min-h-48 flex font-body justify-between items-center text-mercury-400 px-32">
+        <div className="bg-woodsmoke-900 min-h-48 flex font-body justify-between border-t-1 border-woodsmoke-600 items-center text-mercury-400 px-32">
             <div className="flex-col justify-between items-center">
                 <div className="text-4xl font-logo font-medium">
                     Finstox
