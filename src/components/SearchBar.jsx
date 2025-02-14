@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 const SearchBar = () => {
     const navigate = useNavigate();
     return (
-        <div className="flex justify-between items-center pr-4 rounded-lg bg-woodsmoke-700 border-1 border-woodsmoke-500 text-mercury-200">
+        <div className="flex justify-between items-center pr-4 rounded-lg border-1 border-woodsmoke-500 text-mercury-200">
             <input
                 id="search"
                 type="text"
