@@ -12,6 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   const location = useLocation();
+  
   return (
       <div className='bg-woodsmoke-950 bg-main bg-cover bg-no-repeat min-w-screen'>
         <Navbar />
@@ -20,7 +21,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/explore" element={<Explore />} />
-            <Route path="/stock" element={<Stock />} />
+            <Route path="/stock/:symbol" element={<Stock />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

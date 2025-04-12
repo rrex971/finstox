@@ -1,8 +1,26 @@
-import { React } from "react";
+import { React, use, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import transition from "../transition";
 import TradingViewWidget from "../components/TradingViewWidget";
 
 const Stock = () => {
+    const params = useParams();
+    const symbol = params.symbol;
+    
+    
+    const [stock, setStock] = useState("");
+
+    useEffect(() => {
+        
+        const apiCall = async () => {
+            //const response = await fetch(`/api/stock?symbol=${symbol}`);
+            //const data = await response.json();
+            //setStock(data.sName);
+            setStock("Eternal")
+        }
+        apiCall();
+    }, [symbol]);
+
     return (
         
         <div className="flex justify-between bg-woodsmoke-950 h-lvh font-body">
@@ -13,7 +31,7 @@ const Stock = () => {
                     </div>
                     <div className="flex-col w-full">
                         <div className="stockname text-4xl text-mercury-200">
-                            Zomato Ltd
+                            {stock}
                         </div>
                         <div className="stockprice text-2xl text-mercury-400">
                             216.45 INR 
@@ -23,7 +41,7 @@ const Stock = () => {
                         </div>
                     </div>
                 </div>
-                <TradingViewWidget />
+                <TradingViewWidget symbol={symbol}/>
             </div>
             <div className="trading-buttons pr-48 py-12 flex-col font-body font-bold">
                 <div className="buybutton bg-emerald-500 text-3xl text-mercury-200 rounded-lg px-48 py-6 my-4 transition-colors duration-300

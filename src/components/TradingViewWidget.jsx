@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, memo } from 'react';
 
-function TradingViewWidget() {
+function TradingViewWidget(props) {
   const container = useRef();
   const mounted = useRef(false);
   const [rendered, setRendered] = useState(false);
@@ -15,7 +15,7 @@ function TradingViewWidget() {
         script.innerHTML = `
             {
             "autosize": true,
-            "symbol": "BSE:ZOMATO",
+            "symbol": "BSE:${props.symbol}",
             "interval": "D",
             "timezone": "Asia/Kolkata",
             "theme": "dark",
