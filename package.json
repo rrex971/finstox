@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.4",
+    "express": "^4.21.2",
     "motion": "^12.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
