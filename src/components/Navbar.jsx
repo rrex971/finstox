@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 
 const Navbar = () => {
     return (
-    <nav className="bg-woodsmoke-900 bg-cover border-b-1 border-woodsmoke-600  font-body p-4 md:p-5">
+    <nav className="bg-woodsmoke-900 bg-cover border-b-1 border-woodsmoke-600  font-body p-4 md:p-5 overflow-visible">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <div className="flex justify-between items-center w-full md:w-auto">
           <div className="text-mercury-200 text-lg md:text-4xl font-logo font-normal">
@@ -16,7 +16,7 @@ const Navbar = () => {
         </div>
 
         <ul
-          className={`max-h-[400px] opacity-100 md:max-h-none md:opacity-100 transition-all duration-500 ease-in-out overflow-hidden md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-start md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-bold text-mercury-200 w-full md:w-auto mt-4 md:mt-0`}
+          className={`h-72 opacity-100 md:max-h-12 md:opacity-100 transition-all duration-500 ease-in-out overflow-visible md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-start md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-bold text-mercury-200 w-full md:w-auto mt-4 md:mt-0`}
         >
           <li>
             <NavLink

@@ -1,26 +1,49 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import transition from "../transition";
 import ExploreStock from "../components/ExploreStock";
 import { Link } from "react-router";
+import ExplorePanel from "../components/ExplorePanel";
+import LoadingScreen from "./LoadingScreen";
 
 const Explore = () => {
+    const [data1, setData1] = useState({});
+    const [data2, setData2] = useState({});
+    const [loading1, setLoading1] = useState(true);
+    const [loading2, setLoading2] = useState(true);
+
+    useEffect(() => {
+        let cancel = false;
+        const fetchTopGainers = async () => {
+            const response = await fetch(`http://localhost:8000/getTopGainers`);
+            const data = await response.json();
+            if (!cancel) {
+                setData1(data);
+                setLoading1(false);
+            }
+        }
+        const fetchTopLosers = async () => {
+            const response = await fetch(`http://localhost:8000/getTopLosers`);
+            const data = await response.json();
+            if (!cancel) {
+                setData2(data);
+                setLoading2(false);
+            }
+        }
+        fetchTopGainers();
+        fetchTopLosers();
+        return () => {
+            cancel = true;
+        }
+    }, []);
     return (
-        <div className="h-screen text-4xl flex justify-center font-body pt-24">
-            <div className="text-mercury-200 bg-woodsmoke-900 border-t border-x border-woodsmoke-700 rounded-xl w-5/6 flex flex-col py-16 px-16 space-y-16">
-                <div className="font-bold pb-4">Trending Stocks</div>
-                <div className="h-1/5 bg-woodsmoke-850">
-                    <Link to={"/stock?n=Zomato"}><ExploreStock /></Link>
-                </div>
-                <div className="w-1/5 h-1/5 bg-woodsmoke-850">
-                    Stock 2
-                </div>
-                <div className="w-1/5 h-1/5 bg-woodsmoke-850">
-                    Stock 3
-                </div>
-                <div className="w-1/5 h-1/5 bg-woodsmoke-850">
-                    Stock 4
-                </div>
+        <div className="h-fit min-h-screen text-xl flex justify-evenly font-body pt-24">
+            {loading1 || loading2 ? <LoadingScreen /> : 
+            <div className="flex justify-center space-x-8 mb-24">
+                <ExplorePanel title="Top Gainers" data={data1} />
+                <ExplorePanel title="Top Losers" data={data2} />
             </div>
+        }
+            
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { React, use, useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import transition from "../transition";
 import TradingViewWidget from "../components/TradingViewWidget";
@@ -6,38 +6,66 @@ import TradingViewWidget from "../components/TradingViewWidget";
 const Stock = () => {
     const params = useParams();
     const symbol = params.symbol;
+    const [liveTimeout, setLiveTimeout] = useState(null);
     
-    
-    const [stock, setStock] = useState("");
-
+    const [stock, setStock] = useState({
+        "name" : "",
+        "symbol" : "",
+        "price" : "",
+        "onedaychange" : "",
+        "onedaychangepercent" : "",
+        "positive" : true,
+        "logo" : ""
+    });
     useEffect(() => {
-        
+        let timer = null;
         const apiCall = async () => {
-            //const response = await fetch(`/api/stock?symbol=${symbol}`);
-            //const data = await response.json();
-            //setStock(data.sName);
-            setStock("Eternal")
+            const response = await fetch(`http://localhost:8000/getStock?symbol=${symbol}`);
+            const data = await response.json();
+            console.log(data);
+            setStock(data);
         }
         apiCall();
-    }, [symbol]);
+        fetch("http://localhost:8000/isMarketOpen")
+            .then(response => response.text())
+            .then(data => {
+                if(data === "true") {
+                    timer = setInterval(apiCall, 10000);
+                    setLiveTimeout(timer);
+                }
+            });
+        return () => {
+            if(timer) {
+                clearInterval(timer);
+            }
+        }
+        }, [symbol]);
+
+    useEffect(() => {
+        return () => clearInterval(liveTimeout);
+    }, [liveTimeout]);
 
     return (
         
         <div className="flex justify-between bg-woodsmoke-950 h-lvh font-body">
             <div className="flex-col w-full max-h-4/5 pl-48 py-12 mx-12">    
                 <div className="flex align-center">
-                    <div>
-                        <img className="w-24 rounded-lg mr-8" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAb1BMVEXMIC7////MHizIAADFAADjnaDJABTJABDJAAvLEyXKDiHKABjfio713N334+T+/Pzuw8XOMz3ac3jjmZ3YaW7mpajy09XrurzehIj78vPWX2X57O3OLjnnq67POELqtbfUVFvRRk3cfIDvysvgkZRwo2MTAAABl0lEQVRIie1XyXKrMBBUS4A2QJgYsAy22f7/G9PEVXYOySHcXj36gEYz05pFKhAC6UmKP0KeUojU/JlHpknFsIO3xRS7eGIv7cCBA/8mpHX7eK6+/cCU7gscvbfbzFKSwm0Tb5S2QrWoFDWZdt9eN/L+kRMX5/PqMXqRp+esqaYkX85uuhWxqE0OtM1g5qVtvjFtjQ2lKrfhLICV0qMD+qRAoE5+Oahqe7bmTbwUC81jhZAHFAMJLRCLgF5dp0QB9QO45TPQFMD0DumSD0by1CctwhXoNBNIIpakXnouMDJVx4TKhEJtX0S9ArMioVYFStrulGcLpCvKtQH8AyFj5E4xwvVF9MyhutZ0zllfQydF8jQxiwjNIIFN7RMb0CYlwqtGO+JZewQ7EU1BJ9bkuJyI6G7PHgEXKukyv/bT1qEnCjX27NlJl7FSVSzVGntfx9A1od0yLCe3kDn79z5atUELqwehpTDKi0wZ4ZSRNsu8p4lRjJRaDNnPJ0/++hV6Wn63Hzhw4L/C7ovu7qv17sv8rt+He4pPCPcV/XGQRsAAAAAASUVORK5CYII=" alt="stock" />
+                    <div className="imagecontainer flex justify-center items-center bg-woodsmoke-50 w-24 h-24 rounded-lg mr-8">
+                        <img className="contain" src={`http://localhost:8000/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
                     </div>
                     <div className="flex-col w-full">
                         <div className="stockname text-4xl text-mercury-200">
-                            {stock}
+                            {stock.name}
                         </div>
                         <div className="stockprice text-2xl text-mercury-400">
-                            216.45 INR 
+                            {(Math.round(stock.price * 100) / 100).toFixed(2)}
                         </div>
                         <div className="onedaychange text-xl text-emerald-400 mb-12">
-                            +1.20 INR (+0.5%)
+                            {stock.positive ? "+" : "-"}
+                            {(Math.round(stock.onedaychange * 100) / 100).toFixed(2)}
+                            &nbsp;INR&nbsp;
+                            ({stock.positive ? "+" : "-"}
+                            {(Math.round(stock.onedaychangepercent * 100) / 100).toFixed(2)}%)
                         </div>
                     </div>
                 </div>

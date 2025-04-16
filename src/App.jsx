@@ -7,6 +7,7 @@ import Explore from './screens/Explore';
 import Stock from './screens/Stock';
 import NotFound from './screens/NotFound';
 import Footer from './components/Footer';
+import Login from './screens/Login';
 import { AnimatePresence } from 'framer-motion';
 
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/stock/:symbol" element={<Stock />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
