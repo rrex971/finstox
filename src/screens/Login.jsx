@@ -18,7 +18,7 @@ const Login = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8000/login`, {
+            const response = await fetch(`https://api.finstox.rrex.cc/login`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

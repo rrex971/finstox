@@ -38,7 +38,7 @@ const SearchBar = () => {
     }, [debouncedTerm]);
 
     const fetchResults = async (term) => {
-        const response = await fetch(`http://localhost:8000/getSearchSuggestions?query=${term}`);
+        const response = await fetch(`https://api.finstox.rrex.cc/getSearchSuggestions?query=${term}`);
         const data = await response.json();
         setData(data);
         console.log(data);
@@ -89,7 +89,7 @@ const SearchBar = () => {
                             {data?.suggestions?.map((suggestion) => (
                                 <li key={suggestion.symbol} className="py-2 hover:bg-woodsmoke-800 transition-all duration-500 ease-in-out">
                                     <Link to={`/stock/${suggestion.symbol}`} className="text-mercury-200" onFocus= {() => {setFocused(true)}} onMouseUp={() => {setResultHover(false); setFocused(false)}}>
-                                        <img className="w-8 inline mr-2" src={`http://localhost:8000/logos/${suggestion.symbol}.jpg`} alt="stock" />
+                                        <img className="w-8 inline mr-2" src={`https://api.finstox.rrex.cc/logos/${suggestion.symbol}.jpg`} alt="stock" />
                                         {suggestion.symbol}
                                         <span className="text-sm block text-mercury-400">{suggestion.name}</span>
                                     </Link>

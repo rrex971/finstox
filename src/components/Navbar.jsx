@@ -12,7 +12,7 @@ const Navbar = () => {
     useEffect(() => {
         const username = localStorage.getItem('username')
         if (username) {
-            fetch(`http://localhost:8000/getWallet?username=${username}`)
+            fetch(`https://api.finstox.rrex.cc/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);

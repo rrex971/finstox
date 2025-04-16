@@ -14,7 +14,7 @@ const Explore = () => {
     useEffect(() => {
         let cancel = false;
         const fetchTopGainers = async () => {
-            const response = await fetch(`http://localhost:8000/getTopGainers`);
+            const response = await fetch(`https://api.finstox.rrex.cc/getTopGainers`);
             const data = await response.json();
             if (!cancel) {
                 setData1(data);
@@ -22,7 +22,7 @@ const Explore = () => {
             }
         }
         const fetchTopLosers = async () => {
-            const response = await fetch(`http://localhost:8000/getTopLosers`);
+            const response = await fetch(`https://api.finstox.rrex.cc/getTopLosers`);
             const data = await response.json();
             if (!cancel) {
                 setData2(data);

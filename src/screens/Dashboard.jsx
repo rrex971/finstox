@@ -10,7 +10,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchHoldings = async () => {
-            const response = await fetch(`http://localhost:8000/getHoldings?username=${localStorage.getItem("username")}`);
+            const response = await fetch(`https://api.finstox.rrex.cc/getHoldings?username=${localStorage.getItem("username")}`);
             const data = await response.json();
             setHoldings(data);
             setLoading(false);

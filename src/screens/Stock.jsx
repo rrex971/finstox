@@ -21,13 +21,13 @@ const Stock = () => {
     useEffect(() => {
         let timer = null;
         const apiCall = async () => {
-            const response = await fetch(`http://localhost:8000/getStock?symbol=${symbol}`);
+            const response = await fetch(`https://api.finstox.rrex.cc/getStock?symbol=${symbol}`);
             const data = await response.json();
             console.log(data);
             setStock(data);
         }
         apiCall();
-        fetch("http://localhost:8000/isMarketOpen")
+        fetch("https://api.finstox.rrex.cc/isMarketOpen")
             .then(response => response.text())
             .then(data => {
                 if(data === "true") {
@@ -52,7 +52,7 @@ const Stock = () => {
             <div className="flex-col w-full max-h-4/5 pl-48 py-12 mx-12">    
                 <div className="flex align-center">
                     <div className="imagecontainer flex justify-center items-center bg-woodsmoke-700 w-24 h-24 rounded-lg mr-8">
-                        <img className="w-24 h-24 contain rounded-lg" src={`http://localhost:8000/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
+                        <img className="w-24 h-24 contain rounded-lg" src={`https://api.finstox.rrex.cc/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
                     </div>
                     <div className="flex-col w-full">
                         <div className="stockname text-4xl text-mercury-200">
