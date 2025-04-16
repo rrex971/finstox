@@ -29,7 +29,7 @@ const SearchResults = () => {
             {loading ? <LoadingScreen /> : (
             <div className="text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-5/6 flex flex-col py-16 px-16 space-y-16">
                 <div className="font-body font-bold pb-4">Search results for "{searchParams.get("q")}"</div>
-                <div className="text-2xl">
+                <div className="text-2xl flex flex-col divide-y divide-woodsmoke-700">
                     {Object.entries(data.suggestions).map(([key, value]) => (
                         <div key={key}>
                             <Link to={`/stock/${value.symbol}`}><ExploreStock key={value.symbol} data={value} /></Link>

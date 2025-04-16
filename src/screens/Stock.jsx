@@ -15,7 +15,8 @@ const Stock = () => {
         "onedaychange" : "",
         "onedaychangepercent" : "",
         "positive" : true,
-        "logo" : ""
+        "website" : "",
+        "industry": ""
     });
     useEffect(() => {
         let timer = null;
@@ -50,8 +51,8 @@ const Stock = () => {
         <div className="flex justify-between bg-woodsmoke-950 h-lvh font-body">
             <div className="flex-col w-full max-h-4/5 pl-48 py-12 mx-12">    
                 <div className="flex align-center">
-                    <div className="imagecontainer flex justify-center items-center bg-woodsmoke-50 w-24 h-24 rounded-lg mr-8">
-                        <img className="contain" src={`http://localhost:8000/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
+                    <div className="imagecontainer flex justify-center items-center bg-woodsmoke-700 w-24 h-24 rounded-lg mr-8">
+                        <img className="w-24 h-24 contain rounded-lg" src={`http://localhost:8000/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
                     </div>
                     <div className="flex-col w-full">
                         <div className="stockname text-4xl text-mercury-200">
@@ -76,6 +77,61 @@ const Stock = () => {
                                 hover:bg-emerald-600">Buy</div>
                 <div className="sellbutton bg-amaranth-500 text-3xl text-mercury-200 rounded-lg px-48 py-6 my-4 transition-colors duration-300
                                 hover:bg-amaranth-600">Sell</div>
+                <div className="h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col space-y-4 py-4 px-4">
+                    <div className="website-info">
+                        <span className="block text-xl text-mercury-200">Website</span>
+                        <span className="block text-lg text-mercury-400 underline">
+                            <a href={`https://${stock.website}`}>{stock.website}</a>
+                        </span>
+                    </div>
+                    <div className="industry-info">
+                        <span className="block text-xl text-mercury-200">Industry</span>
+                        <span className="block text-lg text-mercury-400">
+                            {stock.industry}
+                        </span>
+                    </div>
+                </div>
+                <div className="mt-4 h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col space-y-4 py-4 px-4">
+                    <div className="percent-prediction">
+                        <span className="block text-xl text-mercury-200">AI Price Prediction</span>
+                        <span className="block text-lg text-mercury-400 ">
+                            Movement in next 7 days: <span className="text-emerald-500">+24.50 (+7.14%)</span>
+                        </span>
+                    </div>
+                    <div className="forecast-price">
+                        <span className="block text-xl text-mercury-200">7-day Forecast</span>
+                        <div className="grid grid-cols-7 text-sm pt-2">
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                329.4
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                324.37
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                333.87
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                341.1
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                348.4
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                354.32
+                            </div>
+                            <div className="p-2 justify-center items-center w-14 rounded-sm border border-woodsmoke-700">
+                                360.55
+                            </div>
+                        </div>
+                    </div>
+                    <div className="forecast-price">
+                        <span className="block text-xl text-mercury-200">AI Verdict</span>
+                        <div className="block text-lg text-emerald-500">
+                            Worth Buying!
+                        </div>
+                            
+                    </div>
+                </div>
             </div>
 
         </div>

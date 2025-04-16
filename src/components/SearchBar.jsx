@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { BarsFade } from "react-svg-spinners";
 
 const SearchBar = () => {
     const navigate = useNavigate();
@@ -80,13 +81,17 @@ const SearchBar = () => {
                     onMouseLeave={() => setResultHover(false)}
                 >
                     {loading ? (
-                        <div className="py-2">Loading...</div>
+                        <div className="py-2 flex justify-center items-center">
+                            <BarsFade width="30" height="30" color="#FFFFFF" />
+                        </div>
                     ) : (
-                        <ul className="list-none pl-8">
+                        <ul className="list-none pl-8 flex flex-col divide-y divide-woodsmoke-700">
                             {data?.suggestions?.map((suggestion) => (
                                 <li key={suggestion.symbol} className="py-2 hover:bg-woodsmoke-800 transition-all duration-500 ease-in-out">
-                                    <Link to={`/stock/${suggestion.symbol}`} className="text-mercury-200" onMouseUp={() => {setResultHover(false); setFocused(false)}}>
-                                        {suggestion.symbol} - {suggestion.name}
+                                    <Link to={`/stock/${suggestion.symbol}`} className="text-mercury-200" onFocus= {() => {setFocused(true)}} onMouseUp={() => {setResultHover(false); setFocused(false)}}>
+                                        <img className="w-8 inline mr-2" src={`http://localhost:8000/logos/${suggestion.symbol}.jpg`} alt="stock" />
+                                        {suggestion.symbol}
+                                        <span className="text-sm block text-mercury-400">{suggestion.name}</span>
                                     </Link>
                                 </li>   
                             ))}

@@ -5,10 +5,14 @@ import Home from './screens/Home'
 import SearchResults from './screens/SearchResults';
 import Explore from './screens/Explore';
 import Stock from './screens/Stock';
+import Dashboard from './screens/Dashboard'
+import Wallet from './screens/Wallet';
 import NotFound from './screens/NotFound';
 import Footer from './components/Footer';
 import Login from './screens/Login';
+import Logout from './screens/Logout';
 import { AnimatePresence } from 'framer-motion';
+import Register from './screens/Register';
 
 
 const App = () => {
@@ -22,7 +26,11 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/explore" element={<Explore />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/stock/:symbol" element={<Stock />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
