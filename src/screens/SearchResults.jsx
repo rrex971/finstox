@@ -12,7 +12,7 @@ const SearchResults = () => {
     useEffect(() => {
         let cancel = false;
         const fetchResults = async () => {
-            const response = await fetch(`https://api.finstox.rrex.cc/getSearchSuggestionsFull?query=${searchParams.get("q")}`);
+            const response = await fetch(`https://finapi.rrex.cc/getSearchSuggestionsFull?query=${searchParams.get("q")}`);
             const data = await response.json();
             if (!cancel) {
                 setData(data);

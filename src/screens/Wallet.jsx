@@ -16,7 +16,7 @@ const Wallet = () => {
         const username = localStorage.getItem('username')
         if (username) {
             setUname(username);
-            fetch(`https://api.finstox.rrex.cc/getWallet?username=${username}`)
+            fetch(`https://finapi.rrex.cc/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);
@@ -79,7 +79,7 @@ const Wallet = () => {
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
                                         const amount = parseFloat(e.target.amount.value);
-                                        fetch(`https://api.finstox.rrex.cc/deposit`, {
+                                        fetch(`https://finapi.rrex.cc/deposit`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ const Wallet = () => {
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
                                         const amount = parseFloat(e.target.amount.value);
-                                        fetch(`https://api.finstox.rrex.cc/withdraw`, {
+                                        fetch(`https://finapi.rrex.cc/withdraw`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
