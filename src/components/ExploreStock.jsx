@@ -3,13 +3,13 @@ import React from "react";
 
 const ExploreStock = (props) => {
     return (
-        <div className="flex h-36 justify-between font-body font-bold text-mercury-200 hover:bg-woodsmoke-700 rounded-lg transition-colors duration-300 px-8 my-2">
+        <div className="flex h-36 justify-between font-body font-bold text-mercury-200 hover:bg-woodsmoke-800  hover:shadow-lg rounded-lg transition-colors duration-300 px-8 my-2">
             <div className="imagecontainer flex items-center">
                 
                 <img className="w-16 rounded-lg mr-2" src={`https://finapi.rrex.cc/logos/${props.data.symbol}.jpg`} alt="stock" />
                 <div className="stockname w-fit pr-4 font-regular">
                     {props.data.name} 
-                    <span className="text-mercury-400 font-normal block">{props.data.symbol}</span>
+                    <span className="mt-1.5 text-mercury-400 text-sm font-bold border border-woodsmoke-700 px-1.5 w-fit rounded-lg block">{props.data.symbol}</span>
                 </div>
             </div>
             

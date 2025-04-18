@@ -52,9 +52,12 @@ const Dashboard = () => {
                 <div className="w-5/6 text-mercury-200 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col py-16 px-16">
                     <div className="font-bold text-4xl mb-12">Holdings</div>
                     <div className="stocks flex flex-col divide-y divide-woodsmoke-700">
-                        {holdings.holdings.map(stock => (
+                    { holdings.holdings.length !== 0 ?
+                        holdings.holdings.map(stock => (
                             <Link to={`/stock/${stock.symbol}`}><DashboardStock key={stock.symbol} data={stock} /></Link>
-                        ))}
+                        )) : 
+                        <div className="text-xl italic text-mercury-800">No stock holdings</div>
+                    }
                     </div>
                 </div>
             </div>

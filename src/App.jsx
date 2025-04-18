@@ -14,7 +14,7 @@ import Logout from './screens/Logout';
 import { AnimatePresence } from 'framer-motion';
 import Register from './screens/Register';
 import GlobalContext from './GlobalContext';
-
+import { ToastContainer, Slide } from 'react-toastify';
 
 const App = () => {
   const location = useLocation();
@@ -22,7 +22,18 @@ const App = () => {
   
   return (
     <GlobalContext.Provider value={{navbarRefresh, setNavbarRefresh}}>
-      <div className='bg-woodsmoke-950 bg-main bg-cover bg-no-repeat min-w-screen'>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        theme="dark"
+        transition={Slide}
+      />
+      <div className='bg-woodsmoke-950 bg-main bg-fixed bg-cover bg-left-top bg-repeat-y'>
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>

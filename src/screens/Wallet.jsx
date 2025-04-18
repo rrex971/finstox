@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import LoadingScreen from "./LoadingScreen";
 import { FaX } from "react-icons/fa6";
 import GlobalContext from "../GlobalContext";
-import { nav } from "motion/react-client";
 
 const Wallet = () => {
     const {navbarRefresh, setNavbarRefresh} = useContext(GlobalContext);
@@ -16,6 +15,7 @@ const Wallet = () => {
     const [withdrawMenuOpen, setWithdrawMenuOpen] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const [uname, setUname] = useState()
+    
     useEffect(() => {
         const username = localStorage.getItem('username')
         if (username) {
@@ -28,7 +28,6 @@ const Wallet = () => {
                 .then(data => {
                     setData(data);
                     setLoading(false);
-
                 })
                 .catch(error => {
                     setError(error.message);
@@ -77,6 +76,16 @@ const Wallet = () => {
                             </div>
                         )}
                         <div className="flex flex-col w-1/3 space-x-4">
+                            {(depositMenuOpen || withdrawMenuOpen) && (
+                                <motion.div
+                                    className="absolute w-full h-full top-0 left-0 bluroverlay backdrop-blur-sm"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                </motion.div>
+                            )}
                             {depositMenuOpen && (
                                 <motion.div
                                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 w-1/2 shadow-2xl"
@@ -115,7 +124,6 @@ const Wallet = () => {
                                         <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
                                         <div className="flex justify-between items-center">
                                             <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="submit">Submit</button>
-                                            
                                         </div>
                                     </form>
                                 </motion.div>
@@ -165,7 +173,6 @@ const Wallet = () => {
                                         <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
                                         <div className="flex justify-between items-center">
                                             <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="submit">Submit</button>
-                                            
                                         </div>
                                     </form>
                                 </motion.div>
@@ -186,6 +193,4 @@ const Wallet = () => {
 }
 
 export default Wallet;
-
-
 

@@ -10,9 +10,10 @@ const Explore = () => {
     const [data2, setData2] = useState({});
     const [loading1, setLoading1] = useState(true);
     const [loading2, setLoading2] = useState(true);
-
+    const [liveTimeout, setLiveTimeout] = useState(null);
     useEffect(() => {
         let cancel = false;
+        let timer = null;
         const fetchTopGainers = async () => {
             const response = await fetch(`https://finapi.rrex.cc/getTopGainers`);
             const data = await response.json();
@@ -29,12 +30,29 @@ const Explore = () => {
                 setLoading2(false);
             }
         }
-        fetchTopGainers();
-        fetchTopLosers();
+        const apiCall = async () => {
+            await fetchTopGainers();
+            await fetchTopLosers();
+        }
+        apiCall();
+        fetch("https://finapi.rrex.cc/isMarketOpen")
+            .then(response => response.text())
+            .then(data => {
+                if(data === "true") {
+                    timer = setInterval(apiCall, 10000);
+                    setLiveTimeout(timer);
+                }
+            });
         return () => {
             cancel = true;
+            if(timer) {
+                clearInterval(timer);
+            }
         }
     }, []);
+    useEffect(() => {
+        return () => clearInterval(liveTimeout);
+    }, [liveTimeout]);
     return (
         <div className="h-fit min-h-screen text-xl flex justify-evenly font-body pt-24">
             {loading1 || loading2 ? <LoadingScreen /> : 
