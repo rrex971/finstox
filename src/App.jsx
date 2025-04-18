@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router';
 import Navbar from './components/Navbar';
 import Home from './screens/Home'
@@ -13,12 +13,15 @@ import Login from './screens/Login';
 import Logout from './screens/Logout';
 import { AnimatePresence } from 'framer-motion';
 import Register from './screens/Register';
+import GlobalContext from './GlobalContext';
 
 
 const App = () => {
   const location = useLocation();
+  const [navbarRefresh, setNavbarRefresh] = useState(false);
   
   return (
+    <GlobalContext.Provider value={{navbarRefresh, setNavbarRefresh}}>
       <div className='bg-woodsmoke-950 bg-main bg-cover bg-no-repeat min-w-screen'>
         <Navbar />
         <AnimatePresence mode="wait">
@@ -37,6 +40,7 @@ const App = () => {
         </AnimatePresence>
         <Footer className="absolute bottom-0 left-0"/>
       </div>
+    </GlobalContext.Provider>
   );
 };
 

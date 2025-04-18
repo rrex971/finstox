@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router';
 import { FaWallet } from "react-icons/fa";
 import SearchBar from './SearchBar';
+import GlobalContext from '../GlobalContext';
 
 const Navbar = () => {
+    const {navbarRefresh, setNavbarRefresh} = useContext(GlobalContext);
     const location = useLocation();
     const token = localStorage.getItem('token');
     const [data, setData] = useState({"balance" : 0});
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        
         const username = localStorage.getItem('username')
         if (username) {
             fetch(`https://finapi.rrex.cc/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);
+                    setNavbarRefresh(false);
                 })
                 .catch(error => {
                     setError(error.message);
                 })
         }
-      }, []);
+      }, [navbarRefresh]);
 
 
 

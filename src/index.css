@@ -21,8 +21,8 @@
 }
 
 @theme {
-  --font-body: "Switzer";
-  --font-head: "Clash Display";
+  --font-body: "InterDisplay";
+  --font-head: "InterDisplay";
   --font-logo: "Chillax";
 
   --background-image-main: url('/public/background.svg');
