@@ -13,7 +13,7 @@ const Home = () => {
                         <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                             Trade smart, grow fast.
                         </h1>
-                        <p className="font-light font-body text-2xl lg:text-3xl text-mercury-300">
+                        <p className="font-regular font-body text-2xl lg:text-3xl text-mercury-300">
                             Finstox provides the tools and insights you need to navigate the stock market confidently.
                         </p>
                         <div className="pt-4">
@@ -61,7 +61,7 @@ const Home = () => {
             <section className="py-20">
                  <div className="container mx-auto px-6 text-center">
                      <h2 className="text-4xl font-bold font-head mb-12">Get Started in Minutes</h2>
-                     <div className="flex flex-col md:flex-row justify-around items-start gap-10">
+                     <div className="flex flex-col md:flex-row md:justify-around items-start gap-10">
                         <div className="flex flex-col items-center max-w-xs">
                             <div className="bg-san-marino-900 rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4">1</div>
                             <h3 className="text-xl font-semibold font-head mb-2">Create Account</h3>

@@ -104,7 +104,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
             <FaX />
             </button>
           </div>
-          <div className="my-4 text-mercury-200 text-sm font-medium">Owned: {quantityHeld}</div>
+          <div className="my-4 text-mercury-400 text-lg font-medium">Owned: {quantityHeld}</div>
           <input
             className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
             type="text"

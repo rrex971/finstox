@@ -3,7 +3,7 @@ import React from "react";
 
 const ExploreStock = (props) => {
     return (
-        <div className="flex h-36 justify-between font-body font-bold text-mercury-200 hover:bg-woodsmoke-800  hover:shadow-lg rounded-lg transition-colors duration-300 px-8 my-2">
+        <div className="flex h-30 justify-between font-body font-bold text-mercury-200 hover:bg-woodsmoke-800  hover:shadow-lg rounded-lg transition-colors duration-300 px-8 my-2">
             <div className="imagecontainer flex items-center">
                 
                 <img className="w-16 rounded-lg mr-2" src={`https://finapi.rrex.cc/logos/${props.data.symbol}.jpg`} alt="stock" />
