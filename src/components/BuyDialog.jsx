@@ -86,7 +86,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
 
   return (
     <motion.div
-      className={`text-mercury-200 text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 shadow-3xl/70 w-1/2`}
+      className={`text-mercury-200 text-4xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 shadow-3xl/70 w-11/12 md:w-1/2`}
       variants={popupVariants}
       initial="hidden"
       animate={open ? "visible" : "hidden"}

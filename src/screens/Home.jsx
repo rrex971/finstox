@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className="text-mercury-200 font-body">
 
-            <section className="container mx-auto px-6 py-24 md:py-32 lg:py-48">
+            <section className="container mx-auto px-4 py-24 md:py-32 lg:py-48">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
                     <div className="md:w-1/2 text-center md:text-left flex-col font-head space-y-6">
                         <div className="relative">
@@ -34,10 +34,10 @@ const Home = () => {
             </section>
 
             <section className="py-20">
-                <div className="container mx-auto px-6 text-center">
+                <div className="container mx-auto px-4 text-center">
                     <h2 className="text-4xl font-bold font-head mb-4">Why Finstox?</h2>
                     <p className="text-xl text-mercury-300 mb-12">Everything you need to succeed in one platform.</p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-woodsmoke-900 border border-woodsmoke-700 p-8 rounded-lg shadow-lg flex flex-col items-center">
                             <FaChartPie className="w-16 h-16 text-san-marino-500 mb-4" />
                             <h3 className="text-2xl font-bold font-head mb-3">Real-Time Data</h3>
@@ -64,9 +64,9 @@ const Home = () => {
             </section>
 
             <section className="py-20">
-                 <div className="container mx-auto px-6 text-center">
+                 <div className="container mx-auto px-4 text-center">
                      <h2 className="text-4xl font-bold font-head mb-12">Get Started in Minutes</h2>
-                     <div className="flex flex-col md:flex-row md:justify-around items-start gap-10">
+                     <div className="flex flex-col md:flex-row md:justify-around items-center md:items-start gap-10">
                         <div className="flex flex-col items-center max-w-xs">
                             <div className="bg-san-marino-900 rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4">1</div>
                             <h3 className="text-xl font-semibold font-head mb-2">Create Account</h3>
@@ -87,7 +87,7 @@ const Home = () => {
             </section>
 
             <section className="bg-woodsmoke-900 border-t border-woodsmoke-700 text-mercury-200 py-16">
-                 <div className="container mx-auto px-6 text-center">
+                 <div className="container mx-auto px-4 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold font-head mb-4">Ready to Elevate Your Trading?</h2>
                     <p className="text-xl mb-8">Join the leagues of many successful traders on Finstox.</p>
                     <Link to="/register" className="bg-mercury-200 text-san-marino-500 hover:text-mercury-200 hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-san-marino-500 font-bold py-3 px-8 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105">

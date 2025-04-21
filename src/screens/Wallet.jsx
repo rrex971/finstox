@@ -57,10 +57,10 @@ const Wallet = () => {
         return <LoadingScreen />
     } else {
         return (
-            <div className="h-fit min-h-screen text-4xl flex font-body justify-center pt-24 pb-24">
-                <div className="h-fit text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-5/6 flex flex-col pt-16 pb-32 px-16 space-y-16">
+            <div className="h-fit min-h-screen text-4xl flex font-body justify-center pt-8 md:pt-24 pb-24">
+                <div className="h-fit text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-11/12 md:w-5/6  flex flex-col pt-16 pb-32 px-16 space-y-16">
                     <div className="font-head font-bold pb-4">Wallet</div>
-                    <div className="flex justify-between items-center">
+                    <div className="flex-col md:flex md:flex-row justify-between items-center">
                         {error ? (
                             <div className="text-red-500">{error}</div>
                         ) : (
@@ -75,7 +75,7 @@ const Wallet = () => {
                                 )}
                             </div>
                         )}
-                        <div className="flex flex-col w-1/3 space-x-4">
+                        <div className="flex flex-col w-full md:w-1/3 space-x-4">
                             {(depositMenuOpen || withdrawMenuOpen) && (
                                 <motion.div
                                     className="absolute w-full h-full top-0 left-0 bluroverlay backdrop-blur-sm"
@@ -88,7 +88,7 @@ const Wallet = () => {
                             )}
                             {depositMenuOpen && (
                                 <motion.div
-                                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 w-1/2 shadow-2xl"
+                                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 md:w-1/2 w-2/3 shadow-2xl"
                                     variants={popupVariants}
                                     initial="hidden"
                                     animate={depositMenuOpen ? "visible" : "hidden"}
@@ -137,7 +137,7 @@ const Wallet = () => {
                             </button>
                             {withdrawMenuOpen && (
                                 <motion.div
-                                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 w-1/2 shadow-2xl"
+                                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-woodsmoke-900 border-woodsmoke-700 border rounded-lg p-4 md:w-1/2 w-2/3 shadow-2xl"
                                     variants={popupVariants}
                                     initial="hidden"
                                     animate={withdrawMenuOpen ? "visible" : "hidden"}

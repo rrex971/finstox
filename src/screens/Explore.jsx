@@ -54,9 +54,9 @@ const Explore = () => {
         return () => clearInterval(liveTimeout);
     }, [liveTimeout]);
     return (
-        <div className="h-fit min-h-screen text-xl flex justify-evenly font-body pt-24">
+        <div className="h-fit min-h-screen text-xl flex flex-col md:flex-row justify-evenly font-body pt-8 md:pt-24">
             {loading1 || loading2 ? <LoadingScreen /> : 
-            <div className="flex justify-center space-x-8 mb-24">
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 mb-24">
                 <ExplorePanel title="Top Gainers" data={data1} />
                 <ExplorePanel title="Top Losers" data={data2} />
             </div>

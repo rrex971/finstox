@@ -44,20 +44,17 @@ const SearchBar = () => {
         console.log(data);
         setLoading(false);
     };
-    const handleSearchInput = (e) => {
-        const value = e.target.value;
-        
-    }
+    
     return (
         <div
             className={`relative flex flex-col justify-between items-center pr-4 rounded-lg border-1 border-woodsmoke-500 text-mercury-200 transition-all duration-500 ease-in-out h-fit`}
         >
-            <div className="flex items-center w-fit transition-all duration-500 ease-in-out">
+            <div className="flex justify-between items-center w-full md:w-fit transition-all duration-500 ease-in-out">
                 <input
                     id="search"
                     type="text"
                     placeholder="Search..."
-                    className="px-4 py-2 placeholder:text-mercury-700 w-48 transition-all duration-500 ease-in-out focus:outline-none focus:w-96"
+                    className="px-4 py-2 placeholder:text-mercury-700 w-full md:w-48 transition-all duration-500 ease-in-out focus:outline-none focus:w-96"
                     onKeyDown={(e) => e.key === 'Enter' && navigate(`/search?q=${e.target.value}`)}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onFocus={() => setFocused(true)}

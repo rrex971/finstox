@@ -30,9 +30,9 @@ const SearchResults = () => {
         }
     }, [searchParams.get("q")]);
     return (
-        <div className="h-fit min-h-screen text-4xl flex font-body justify-center pt-24 pb-24">
+        <div className="h-fit min-h-screen text-2xl md:text-4xl flex font-body justify-center pt-8 md:pt-24 pb-24">
             {loading ? <LoadingScreen /> : (
-            <div className="text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-5/6 flex flex-col py-16 px-16 space-y-16">
+            <div className="text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-11/12 md:w-5/6 flex flex-col py-4 md:py-16 px-4 md:px-16 space-y-0 md:space-y-16">
                 <div className="font-body font-bold pb-4">Search results for "{searchParams.get("q")}"</div>
                 <div className="text-2xl flex flex-col divide-y divide-woodsmoke-700">
                     {data.suggestions.map(suggestion => (

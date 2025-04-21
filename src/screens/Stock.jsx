@@ -72,7 +72,7 @@ const Stock = () => {
     }
 
     return (
-        <div className="flex justify-between h-fit min-h-lvh font-body">
+        <div className="flex flex-col md:flex-row md:space-x-16 pb-8 md:mx-16 justify-between h-fit min-h-lvh font-body">
             { (buyDialogOpen || sellDialogOpen) && (
                 <motion.div
                     className="absolute w-full h-full top-0 left-0 bluroverlay backdrop-blur-sm"
@@ -83,24 +83,24 @@ const Stock = () => {
                 >
                 </motion.div>
             )}
-            <div className="flex-col w-full pl-48 py-12 mx-12">    
+            <div className="flex-col w-full px-4 md:px-0 py-8 md:py-12">    
                 <div className="flex align-center">
-                    <div className="imagecontainer flex justify-center items-center bg-woodsmoke-700 w-24 h-24 rounded-lg mr-8">
-                        <img className="w-24 h-24 contain rounded-lg" src={`https://finapi.rrex.cc/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
+                    <div className="imagecontainer flex justify-center items-center bg-woodsmoke-700 w-fit h-fit rounded-lg mr-4 md:mr-8">
+                        <img className="w-16 md:w-24 contain rounded-lg" src={`https://finapi.rrex.cc/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
                     </div>
                     <div className="flex-col w-full">
-                        <div className="flex items-center">
-                            <div className="font-semibold stockname text-4xl text-mercury-200">
+                        <div className="flex flex-col md:flex-row items-start md:items-center">
+                            <div className="font-semibold stockname text-xl md:text-4xl text-mercury-200">
                                 {stock.name}
                             </div>
-                            <div className="stocksymbol text-lg font-bold text-mercury-400 ml-4 border border-woodsmoke-700 rounded-xl px-2">
+                            <div className="stocksymbol text-md md:text-lg font-bold text-mercury-400 my-2 md:my-0 md:mx-4 border border-woodsmoke-700 rounded-xl px-2">
                                 {stock.symbol}
                             </div>
                         </div>
-                        <div className="stockprice text-2xl text-mercury-400">
+                        <div className="stockprice text-lg md:text-2xl text-mercury-400">
                             {(Math.round(stock.price * 100) / 100).toFixed(2)}&nbsp;INR&nbsp;
                         </div>
-                        <div className={`onedaychange text-xl mb-12 ${stock.positive ? "text-emerald-400" : "text-amaranth-500"}`}>
+                        <div className={`onedaychange text-md md:text-xl mb-12 ${stock.positive ? "text-emerald-400" : "text-amaranth-500"}`}>
                             {stock.positive ? "+" : "-"}
                             {(Math.round(stock.onedaychange * 100) / 100).toFixed(2)}
                             &nbsp;INR&nbsp;
@@ -109,20 +109,20 @@ const Stock = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-2/3 w-full">
+                <div className="h-96 w-full md:h-2/3">
                     <TradingViewWidget symbol={symbol}/>
                 </div>
             </div>
-            <div className="sidebar w-1/2 pr-48 py-12 flex-col font-body font-bold">
+            <div className="sidebar w-full md:w-1/2 px-4 md:px-0 md:py-12 flex-col space-y-4 font-body font-bold">
                 <div 
-                    className="buybutton bg-gradient-to-br from-emerald-400 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:via-emerald-600 hover:to-emerald-700 text-3xl text-mercury-200 rounded-lg px-48 py-6 my-4 transition-colors duration-300
+                    className="buybutton bg-gradient-to-br from-emerald-400 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:via-emerald-600 hover:to-emerald-700 text-3xl text-mercury-200 rounded-lg flex justify-center py-6 transition-colors duration-300
                                 hover:bg-emerald-600"
                     onClick={() => setBuyDialogOpen(true)}
                 >
                     Buy
                 </div>
                 <div 
-                    className="sellbutton bg-gradient-to-br from-amaranth-400 via-amaranth-500 to-amaranth-600 hover:from-amaranth-500 hover:via-amaranth-600 hover:to-amaranth-700 text-3xl text-mercury-200 rounded-lg px-48 py-6 my-4 transition-colors duration-300
+                    className="sellbutton bg-gradient-to-br from-amaranth-400 via-amaranth-500 to-amaranth-600 hover:from-amaranth-500 hover:via-amaranth-600 hover:to-amaranth-700 text-3xl text-mercury-200 rounded-lg flex justify-center py-6 transition-colors duration-300
                                 hover:bg-amaranth-600"
                     onClick={() => setSellDialogOpen(true)}
                 >
@@ -197,4 +197,5 @@ const Stock = () => {
 }
 
 export default transition(Stock);
+
 

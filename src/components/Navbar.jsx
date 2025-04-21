@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router';
-import { FaWallet } from "react-icons/fa";
+import { FaHamburger, FaWallet } from "react-icons/fa";
 import SearchBar from './SearchBar';
 import GlobalContext from '../GlobalContext';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Navbar = () => {
     const {navbarRefresh, setNavbarRefresh} = useContext(GlobalContext);
@@ -10,6 +11,7 @@ const Navbar = () => {
     const token = localStorage.getItem('token');
     const [data, setData] = useState({"balance" : 0});
     const [error, setError] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         
@@ -38,14 +40,17 @@ const Navbar = () => {
               Finstox
             </NavLink>
           </div>
+          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+            <GiHamburgerMenu className='text-mercury-200'/>
+          </button>
         </div>
 
         <ul
-          className={`h-72 opacity-100 md:max-h-12 md:opacity-100 transition-all duration-500 ease-in-out overflow-visible md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-start md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-medium text-mercury-200 w-full md:w-auto mt-4 md:mt-0`}
+          className={`${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'} md:max-h-none md:opacity-100 transition-all duration-300 ease-out overflow-hidden md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-center md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-medium text-mercury-200 w-full md:w-auto md:mt-0`}
         >
           {token && (
             <>
-              <li>
+              <li className='mt-4 md:mt-0'>
                 <NavLink
                   to="/explore"
                   className={({ isActive }) =>
@@ -53,6 +58,7 @@ const Navbar = () => {
                       ? 'text-san-marino-400 opacity-100'
                       : 'navbar-link opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out'
                   }
+                  onClick={() => setIsOpen(false)}
                 >
                   Explore
                 </NavLink>
@@ -65,6 +71,7 @@ const Navbar = () => {
                       ? 'text-san-marino-400 opacity-100'
                       : 'navbar-link opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out'
                   }
+                  onClick={() => setIsOpen(false)}
                 >
                   Dashboard
                 </NavLink>
@@ -80,8 +87,9 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     isActive
                       ? 'text-san-marino-400 opacity-100'
-                      : 'navbar-link opacity-50 hover:opacity-100 transition-allduration-300 ease-in-out'
+                      : 'navbar-link opacity-50 hover:opacity-100 transition-all duration-300 ease-in-out'
                   }
+                  onClick={() => setIsOpen(false)}
                 >
                   <div className="flex items-center space-x-2">
                     <FaWallet />
@@ -97,8 +105,9 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive
                   ? 'text-san-marino-400 opacity-100'
-                  : 'navbar-link opacity-50 hover:opacity-100 transition-allduration-300 ease-in-out'
+                  : 'navbar-link opacity-50 hover:opacity-100 transition-all duration-300 ease-in-out'
               }
+              onClick={() => setIsOpen(false)}
             >
               {token ? 'Logout' : 'Login'}
             </NavLink>
