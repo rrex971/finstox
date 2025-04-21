@@ -10,9 +10,14 @@ const Home = () => {
             <section className="container mx-auto px-6 py-24 md:py-32 lg:py-48">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
                     <div className="md:w-1/2 text-center md:text-left flex-col font-head space-y-6">
-                        <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                            Trade smart, grow fast.
-                        </h1>
+                        <div className="relative">
+                            <h1 className="text-5xl text-mercury-200 text-shadow-lg/20 text-shadow-fuchsia-300 lg:text-7xl font-bold leading-tight">
+                                Trade smart, grow fast.
+                            </h1>
+                            <h1 className="scale-150 absolute blur-3xl top-10 md:left-10 text-6xl bg-gradient-to-br from-fuchsia-400 to-san-marino-700 bg-clip-text text-transparent lg:text-7xl font-bold leading-tight">
+                                Trade smart, grow fast.
+                            </h1>
+                        </div>
                         <p className="font-regular font-body text-2xl lg:text-3xl text-mercury-300">
                             Finstox provides the tools and insights you need to navigate the stock market confidently.
                         </p>
