@@ -46,7 +46,7 @@ const Navbar = () => {
         </div>
 
         <ul
-          className={`${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'} md:max-h-none md:opacity-100 transition-all duration-300 ease-out overflow-hidden md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-center md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-medium text-mercury-200 w-full md:w-auto md:mt-0`}
+          className={`${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'} md:max-h-none md:opacity-100 transition-all duration-300 ease-out overflow-visible md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-center md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-medium text-mercury-200 w-full md:w-auto md:mt-0`}
         >
           {token && (
             <>

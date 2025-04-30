@@ -59,6 +59,8 @@ const SearchBar = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onFocus={() => setFocused(true)}
                     onBlur={(e) => {
+                        setFocused(true);
+                        console.log(resultHover);
                         if(!resultHover){
 
                             e.target.value = ""; 
@@ -73,9 +75,10 @@ const SearchBar = () => {
             </div>
             {debouncedTerm && (
                 <div
-                    className={`absolute top-12 left-0 right-0 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col py-4 px-4 space-y-4 z-50 ${focused ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out`}
-                    onMouseEnter={() => setResultHover(true)}
+                    className={`absolute top-12 left-0 right-0 w-full z-50 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col py-4 px-4 space-y-4 ${focused ? "opacity-100" : "opacity-0"} transition-all duration-500 ease-in-out`}
+                    onMouseOver={() => setResultHover(true)}
                     onMouseLeave={() => setResultHover(false)}
+                    onClick={(e) => {e.preventDefault();}}
                 >
                     {loading ? (
                         <div className="py-2 flex justify-center items-center">
