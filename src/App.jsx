@@ -13,15 +13,16 @@ import Login from './screens/Login';
 import Logout from './screens/Logout';
 import { AnimatePresence } from 'framer-motion';
 import Register from './screens/Register';
+import XAITest from './screens/XAITest';
 import GlobalContext from './GlobalContext';
 import { ToastContainer, Slide } from 'react-toastify';
 
 const App = () => {
   const location = useLocation();
   const [navbarRefresh, setNavbarRefresh] = useState(false);
-  
+
   return (
-    <GlobalContext.Provider value={{navbarRefresh, setNavbarRefresh}}>
+    <GlobalContext.Provider value={{ navbarRefresh, setNavbarRefresh }}>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -46,10 +47,11 @@ const App = () => {
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/register" element={<Register />} />
             <Route path="/stock/:symbol" element={<Stock />} />
+            <Route path="/xai-test" element={<XAITest />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
-        <Footer className="absolute bottom-0 left-0"/>
+        <Footer className="absolute bottom-0 left-0" />
       </div>
     </GlobalContext.Provider>
   );
