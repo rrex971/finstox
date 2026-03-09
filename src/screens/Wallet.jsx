@@ -23,7 +23,7 @@ const Wallet = () => {
             setRefresh(false);
             setNavbarRefresh(true);
             setUname(username);
-            fetch(`https://finapi.rrex.cc/getWallet?username=${username}`)
+            fetch(`http://127.0.0.1:8000/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);
@@ -96,7 +96,7 @@ const Wallet = () => {
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
                                         const amount = parseFloat(e.target.amount.value);
-                                        fetch(`https://finapi.rrex.cc/deposit`, {
+                                        fetch(`http://127.0.0.1:8000/deposit`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ const Wallet = () => {
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
                                         const amount = parseFloat(e.target.amount.value);
-                                        fetch(`https://finapi.rrex.cc/withdraw`, {
+                                        fetch(`http://127.0.0.1:8000/withdraw`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json'

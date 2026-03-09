@@ -17,7 +17,7 @@ const Navbar = () => {
         
         const username = localStorage.getItem('username')
         if (username) {
-            fetch(`https://finapi.rrex.cc/getWallet?username=${username}`)
+            fetch(`http://127.0.0.1:8000/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);

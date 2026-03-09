@@ -14,7 +14,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
   const username = localStorage.getItem("username");
   useEffect(() => {
     if(open) {
-      fetch(`https://finapi.rrex.cc/getQtyOwned?username=${username}&symbol=${symbol}`)
+      fetch(`http://127.0.0.1:8000/getQtyOwned?username=${username}&symbol=${symbol}`)
         .then(response => response.json())
         .then(data => setQuantity(data.quantity));
     }
@@ -37,7 +37,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
         toast.error("Please enter a valid quantity");
         return;
       }
-      fetch(`https://finapi.rrex.cc/buy`, {
+      fetch(`http://127.0.0.1:8000/buy`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

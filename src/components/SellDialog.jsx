@@ -14,7 +14,7 @@ const SellDialog = ({ open, onClose, symbol, price }) => {
 
   useEffect(() => {
     if(open) {
-      fetch(`https://finapi.rrex.cc/getQtyOwned?username=${username}&symbol=${symbol}`)
+      fetch(`http://127.0.0.1:8000/getQtyOwned?username=${username}&symbol=${symbol}`)
         .then(response => response.json())
         .then(data => setQuantity(data.quantity));
     }
@@ -41,7 +41,7 @@ const SellDialog = ({ open, onClose, symbol, price }) => {
         toast.error("Please enter a valid quantity");
         return;
       }
-      fetch(`https://finapi.rrex.cc/sell`, {
+      fetch(`http://127.0.0.1:8000/sell`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
