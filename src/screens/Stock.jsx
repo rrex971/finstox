@@ -6,6 +6,7 @@ import LoadingScreen from "./LoadingScreen";
 import BuyDialog from "../components/BuyDialog";
 import SellDialog from "../components/SellDialog";
 import XAIExplanation from "../components/XAIExplanation";
+import PredictionChart from "../components/PredictionChart";
 import { motion } from "motion/react";
 import { NinetyRingWithBg } from "react-svg-spinners";
 import API_BASE from "../apiConfig";
@@ -242,7 +243,11 @@ const Stock = () => {
                             </div>
                             <div className="forecast-price">
                                 <span className="block text-xl text-mercury-200">Predicted Price Graph</span>
-                                <img className="rounded-lg mt-2" src={`${API_BASE}/${predictionData.filename}`} alt="stock" />
+                                <PredictionChart
+                                    historicalPrices={predictionData.historical_prices}
+                                    predictedPrices={predictionData.predicted_prices}
+                                    lastHistoricalDate={predictionData.last_historical_date}
+                                />
                             </div>
                             {/* XAI Explanations */}
                             {xaiData && (
