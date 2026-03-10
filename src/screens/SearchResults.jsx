@@ -3,6 +3,7 @@ import { useSearchParams, Link } from "react-router";
 import transition from "../transition";
 import LoadingScreen from "./LoadingScreen";
 import ExploreStock from "../components/ExploreStock";
+import API_BASE from "../apiConfig";
 
 
 const SearchResults = () => {
@@ -12,7 +13,7 @@ const SearchResults = () => {
     useEffect(() => {
         let cancel = false;
         const fetchResults = async () => {
-            const response = await fetch(`http://127.0.0.1:8000/getSearchSuggestionsFull?query=${searchParams.get("q")}`);
+            const response = await fetch(`${API_BASE}/getSearchSuggestionsFull?query=${searchParams.get("q")}`);
             if (response.ok) {
                 const data = await response.json();
                 if (!cancel) {

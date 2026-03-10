@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import API_BASE from "../apiConfig";
 import { motion } from "framer-motion";
 import { FaX } from "react-icons/fa6";
 import { toast } from "react-toastify";
@@ -14,7 +15,7 @@ const SellDialog = ({ open, onClose, symbol, price }) => {
 
   useEffect(() => {
     if(open) {
-      fetch(`http://127.0.0.1:8000/getQtyOwned?username=${username}&symbol=${symbol}`)
+      fetch(`${API_BASE}/getQtyOwned?username=${username}&symbol=${symbol}`)
         .then(response => response.json())
         .then(data => setQuantity(data.quantity));
     }
@@ -41,7 +42,7 @@ const SellDialog = ({ open, onClose, symbol, price }) => {
         toast.error("Please enter a valid quantity");
         return;
       }
-      fetch(`http://127.0.0.1:8000/sell`, {
+      fetch(`${API_BASE}/sell`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
