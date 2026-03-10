@@ -91,7 +91,7 @@ const SearchBar = () => {
                                 <li key={suggestion.symbol} className="py-2 hover:bg-woodsmoke-800 transition-all duration-500 ease-in-out">
                                     <Link to={`/stock/${suggestion.symbol}`} className="text-mercury-200" onFocus= {() => {setFocused(true)}} onMouseUp={() => {setResultHover(false); setFocused(false)}}>
                                         <img className="w-8 inline mr-2" src={`${API_BASE}/logos/${suggestion.symbol}.jpg`} alt="stock" />
-                                        {suggestion.symbol}
+                                        <span className="font-semibold tracking-wide">{suggestion.symbol}</span>
                                         <span className="text-sm block text-mercury-400">{suggestion.name}</span>
                                     </Link>
                                 </li>   

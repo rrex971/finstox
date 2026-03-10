@@ -1,8 +1,28 @@
 import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { FaChartPie, FaWallet, FaArrowUp, FaArrowDown, FaBoxOpen } from "react-icons/fa";
 import DashboardStock from "../components/DashboardStock";
 import LoadingScreen from "./LoadingScreen";
 import API_BASE from "../apiConfig";
+
+const StatCard = ({ icon, label, value, sub, color }) => (
+    <motion.div
+        className="bg-woodsmoke-900 border border-woodsmoke-800 rounded-xl px-4 py-4 flex flex-col gap-0.5"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+    >
+        <div className="flex items-center gap-2 text-mercury-400 text-xs font-semibold tracking-wide uppercase">
+            {icon}
+            {label}
+        </div>
+        <div className={`text-2xl md:text-3xl font-bold tabular-nums ${color || "text-mercury-100"}`}>
+            {value}
+        </div>
+        {sub && <div className="text-sm text-mercury-500 tabular-nums">{sub}</div>}
+    </motion.div>
+);
 
 const Dashboard = () => {
     const [holdings, setHoldings] = useState({});
@@ -18,50 +38,64 @@ const Dashboard = () => {
         }
         fetchHoldings();
     }, []);
+
     if (loading) {
         return <LoadingScreen />
     }
-    return (
-        <div className="main h-fit min-h-screen flex-col justify-center items-center space-y-4">
-            <div className="flex font-body justify-center pt-8 md:pt-24">
-                <div className="w-11/12 md:w-5/6  text-mercury-200 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col items-start py-4 md:py-16 px-4 md:px-16">
-                    <div className="font-bold text-4xl mb-4 md:mb-12">Active Total PnL</div>
-                    <div className="stocks grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 gap-y-4 md:gap-x-4 md:gap-y-0 justify-evenly font-bold divide-y md:divide-x md:divide-y-0 divide-dashed divide-woodsmoke-700">
-                        <div className="totalInvested text-lg md:text-2xl">
-                            Total Invested
-                            <span className="block text-2xl md:text-4xl">{holdings.total.totalInvested.toFixed(2)}</span>
-                        </div>
-                        <div className="currentAmount text-lg md:text-2xl">
-                            Current Amount
-                            <span className="block text-2xl md:text-4xl">{holdings.total.totalCurrent.toFixed(2)}</span>
-                        </div>
-                        <div className={`onedaychange text-2xl md:text-4xl text-nowrap ${holdings.total.totalChange >= 0 ? "text-emerald-400" : "text-amaranth-500"}`}>
-                            Total PnL
-                            <span className="block text-2xl md:text-4xl">
-                                {holdings.total.totalChange >= 0 ? "+" : "-"}
-                                {(Math.abs(holdings.total.totalChange)).toFixed(2)}
-                                &nbsp;INR&nbsp;
-                                ({holdings.total.totalChange >= 0 ? "+" : "-"}
-                                {(Math.abs(holdings.total.totalChangePercent)).toFixed(2)}%)
-                            </span>
-                        </div>
 
-                    </div>
-                </div>
+    const { total } = holdings;
+    const pnlPositive = total.totalChange >= 0;
+
+    return (
+        <div className="min-h-screen font-body px-4 md:px-10 lg:px-14 xl:px-20 pt-6 md:pt-10 pb-12 space-y-5">
+
+            {/* Summary cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <StatCard
+                    icon={<FaWallet className="text-accent-400" />}
+                    label="Total Invested"
+                    value={`₹${total.totalInvested.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                />
+                <StatCard
+                    icon={<FaChartPie className="text-accent-400" />}
+                    label="Current Value"
+                    value={`₹${total.totalCurrent.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                />
+                <StatCard
+                    icon={pnlPositive ? <FaArrowUp className="text-emerald-400" /> : <FaArrowDown className="text-amaranth-500" />}
+                    label="Total P&L"
+                    value={`${pnlPositive ? "+" : "-"}₹${Math.abs(total.totalChange).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                    sub={`${pnlPositive ? "+" : "-"}${Math.abs(total.totalChangePercent).toFixed(2)}%`}
+                    color={pnlPositive ? "text-emerald-400" : "text-amaranth-500"}
+                />
             </div>
-            <div className="flex font-body justify-center pb-16 md:pb-24">
-                <div className="w-11/12 md:w-5/6  text-mercury-200 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col py-4 md:py-16 px-4 md:px-16">
-                    <div className="font-bold text-4xl mb-4 md:mb-12">Holdings</div>
-                    <div className="stocks flex flex-col divide-y divide-woodsmoke-700">
-                        {holdings.holdings.length !== 0 ?
-                            holdings.holdings.map(stock => (
-                                <Link to={`/stock/${stock.symbol}`}><DashboardStock key={stock.symbol} data={stock} /></Link>
-                            )) :
-                            <div className="text-xl italic text-mercury-800">No stock holdings</div>
-                        }
-                    </div>
+
+            {/* Holdings list */}
+            <motion.div
+                className="w-full text-mercury-200 bg-woodsmoke-900 border border-woodsmoke-800 rounded-xl flex flex-col py-4 md:py-6 px-4 md:px-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+                <div className="font-bold text-xl mb-3 flex items-center gap-2">
+                    <FaChartPie className="text-accent-400" />
+                    Holdings
                 </div>
-            </div>
+                <div className="stocks flex flex-col divide-y divide-woodsmoke-700">
+                    {holdings.holdings.length !== 0 ?
+                        holdings.holdings.map(stock => (
+                            <Link key={stock.symbol} to={`/stock/${stock.symbol}`}><DashboardStock data={stock} /></Link>
+                        )) :
+                        <div className="py-12 flex flex-col items-center gap-3 text-mercury-600">
+                            <FaBoxOpen className="text-4xl" />
+                            <span className="text-lg">No stock holdings yet</span>
+                            <Link to="/explore" className="text-accent-400 hover:text-accent-300 text-sm font-semibold">
+                                Browse stocks →
+                            </Link>
+                        </div>
+                    }
+                </div>
+            </motion.div>
         </div>
     );
 }

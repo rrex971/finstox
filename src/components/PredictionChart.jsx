@@ -53,7 +53,7 @@ const PredictionChart = ({ historicalPrices, predictedPrices, lastHistoricalDate
         const price = pt?.historical ?? pt?.predicted;
         const isPredicted = pt?.historical == null;
         return (
-            <div className="bg-woodsmoke-800 border border-woodsmoke-600 rounded-lg px-3 py-2 text-sm shadow-lg">
+            <div className="bg-woodsmoke-800 border border-woodsmoke-700 rounded-xl px-3 py-2 text-sm shadow-lg">
                 <div className="text-mercury-400">{label}</div>
                 <div className={`font-semibold ${isPredicted ? (upward ? 'text-emerald-400' : 'text-amaranth-400') : 'text-mercury-200'}`}>
                     ₹{price?.toFixed(2)}

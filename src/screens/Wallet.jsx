@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import LoadingScreen from "./LoadingScreen";
 import { FaX } from "react-icons/fa6";
+import { FaWallet, FaArrowDown, FaArrowUp } from "react-icons/fa";
 import GlobalContext from "../GlobalContext";
 import API_BASE from "../apiConfig";
 
@@ -58,9 +59,9 @@ const Wallet = () => {
         return <LoadingScreen />
     } else {
         return (
-            <div className="h-fit min-h-screen text-4xl flex font-body justify-center pt-8 md:pt-24 pb-24">
-                <div className="h-fit text-mercury-200 bg-woodsmoke-900 border-woodsmoke-700 border rounded-xl w-11/12 md:w-5/6  flex flex-col pt-16 pb-32 px-16 space-y-16">
-                    <div className="font-head font-bold pb-4">Wallet</div>
+            <div className="h-fit min-h-screen text-4xl font-body px-6 md:px-12 lg:px-16 xl:px-24 pt-8 md:pt-24 pb-24">
+                    <div className="h-fit text-mercury-200 bg-woodsmoke-900 border-woodsmoke-800 border rounded-xl w-full flex flex-col pt-16 pb-32 px-16 space-y-16">
+                    <div className="font-head font-bold pb-4 flex items-center gap-3"><FaWallet className="text-accent-400" /> Wallet</div>
                     <div className="flex-col md:flex md:flex-row justify-between items-center">
                         {error ? (
                             <div className="text-red-500">{error}</div>
@@ -69,7 +70,7 @@ const Wallet = () => {
                                 {data ? (
                                     <div className="flex flex-col text-2xl space-x-4">
                                         Your balance is
-                                        <span className="block text-6xl font-bold text-mercury-50">₹{data.balance ? (Math.round(data.balance * 100) / 100).toFixed(2) : '0.00'}</span>
+                                        <span className="block text-6xl font-bold text-mercury-50 tabular-nums">₹{data.balance ? (Math.round(data.balance * 100) / 100).toFixed(2) : '0.00'}</span>
                                     </div>
                                 ) : (
                                     <div>No balance information available.</div>
@@ -120,21 +121,21 @@ const Wallet = () => {
                                     }}>
                                         <div className="flex justify-between items-center">
                                             <label className="text-mercury-200" htmlFor="amount">Deposit amount (₹)</label>
-                                            <button className="text-mercury-200 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="button" onClick={() => setDepositMenuOpen(false)}><FaX /></button>
+                                            <button className="text-mercury-200 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-accent-500 hover:border-accent-500" type="button" onClick={() => setDepositMenuOpen(false)}><FaX /></button>
                                         </div>
-                                        <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
+                                        <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
                                         <div className="flex justify-between items-center">
-                                            <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="submit">Submit</button>
+                                            <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-accent-500 hover:bg-accent-600 rounded-lg text-lg border font-semibold transition-all duration-300 cursor-pointer" type="submit">Submit</button>
                                         </div>
                                     </form>
                                 </motion.div>
                             )}
                             <button
-                                className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500"
+                                className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-accent-500 hover:bg-accent-600 rounded-lg text-lg border font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
                                 type="button"
                                 onClick={() => setDepositMenuOpen(true)}
                             >
-                                Deposit
+                                <FaArrowDown /> Deposit
                             </button>
                             {withdrawMenuOpen && (
                                 <motion.div
@@ -169,21 +170,21 @@ const Wallet = () => {
                                     }}>
                                         <div className="flex justify-between items-center">
                                             <label className="text-mercury-200" htmlFor="amount">Withdraw amount (₹)</label>
-                                            <button className="text-mercury-200 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="button" onClick={() => setWithdrawMenuOpen(false)}><FaX /></button>
+                                            <button className="text-mercury-200 rounded-lg text-lg font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-accent-500 hover:border-accent-500" type="button" onClick={() => setWithdrawMenuOpen(false)}><FaX /></button>
                                         </div>
-                                        <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
+                                        <input className="mt-8 w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500" type="text" pattern="^\d+(\.\d{1,2})?$" inputMode="decimal" id="amount" />
                                         <div className="flex justify-between items-center">
-                                            <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500" type="submit">Submit</button>
+                                            <button className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-accent-500 hover:bg-accent-600 rounded-lg text-lg border font-semibold transition-all duration-300 cursor-pointer" type="submit">Submit</button>
                                         </div>
                                     </form>
                                 </motion.div>
                             )}
                             <button
-                                className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500"
+                                className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-accent-500 hover:bg-accent-600 rounded-lg text-lg border font-semibold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
                                 type="button"
                                 onClick={() => setWithdrawMenuOpen(true)}
                             >
-                                Withdraw
+                                <FaArrowUp /> Withdraw
                             </button>
                         </div>
                     </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { NavLink, useLocation } from 'react-router';
-import { FaHamburger, FaWallet } from "react-icons/fa";
+import { FaWallet, FaCompass, FaChartBar, FaSignInAlt, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import SearchBar from './SearchBar';
 import GlobalContext from '../GlobalContext';
 import API_BASE from '../apiConfig';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const {navbarRefresh, setNavbarRefresh} = useContext(GlobalContext);
@@ -15,7 +15,6 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        
         const username = localStorage.getItem('username')
         if (username) {
             fetch(`${API_BASE}/getWallet?username=${username}`)
@@ -28,94 +27,98 @@ const Navbar = () => {
                     setError(error.message);
                 })
         }
-      }, [navbarRefresh]);
+    }, [navbarRefresh]);
 
+    useEffect(() => { setIsOpen(false); }, [location.pathname]);
 
+    const navLinkClass = ({ isActive }) =>
+        isActive
+            ? 'text-accent-400'
+            : 'text-mercury-300 hover:text-mercury-100 transition-colors duration-200';
+
+    const menuVariants = {
+        closed: { height: 0, opacity: 0, transition: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] } },
+        open: { height: 'auto', opacity: 1, transition: { duration: 0.25, ease: [0.25, 0.1, 0.25, 1] } }
+    };
 
     return (
-    <nav className="bg-woodsmoke-900 bg-cover border-b-1 border-woodsmoke-700  font-body p-4 md:p-5 overflow-visible">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <div className="flex justify-between items-center w-full md:w-auto">
-          <div className="text-mercury-200 text-lg md:text-4xl font-logo font-normal">
-            <NavLink to="/" className="hover:text-transparent hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-san-marino-500 hover:bg-clip-text text-mercury-200 transition-all duration-300 ease-in-out">
-              Finstox
-            </NavLink>
-          </div>
-          <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-            <GiHamburgerMenu className='text-mercury-200'/>
-          </button>
-        </div>
+        <nav className="bg-woodsmoke-950/90 backdrop-blur-xl border-b border-woodsmoke-800/60 font-body sticky top-0 z-50">
+            <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-12 xl:px-16 py-3 md:py-4">
+                <div className="flex justify-between items-center w-full md:w-auto">
+                    <NavLink to="/" className="text-mercury-100 text-xl md:text-2xl font-logo font-medium hover:text-accent-400 transition-colors duration-200">
+                        Finstox
+                    </NavLink>
+                    <button className="md:hidden text-mercury-300 hover:text-mercury-100 transition-colors p-1" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+                        {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+                    </button>
+                </div>
 
-        <ul
-          className={`${isOpen ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'} md:max-h-none md:opacity-100 transition-all duration-300 ease-out overflow-visible md:flex flex-col md:flex-row md:space-x-8 space-y-3 md:space-y-0 justify-center md:justify-end items-start md:items-center text-sm md:text-lg lg:text-xl font-body font-medium text-mercury-200 w-full md:w-auto md:mt-0`}
-        >
-          {token && (
-            <>
-              <li className='mt-4 md:mt-0'>
-                <NavLink
-                  to="/explore"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-san-marino-400 opacity-100'
-                      : 'navbar-link opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out'
-                  }
-                  onClick={() => setIsOpen(false)}
-                >
-                  Explore
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-san-marino-400 opacity-100'
-                      : 'navbar-link opacity-50 hover:opacity-100 transition-opacity duration-300 ease-in-out'
-                  }
-                  onClick={() => setIsOpen(false)}
-                >
-                  Dashboard
-                </NavLink>
-              </li>
+                {/* Desktop nav */}
+                <ul className="hidden md:flex flex-row space-x-6 items-center text-sm font-semibold tracking-wide">
+                    {token && (
+                        <>
+                            <li>
+                                <NavLink to="/explore" className={navLinkClass}>
+                                    <span className="flex items-center gap-1.5"><FaCompass size={14} /> Explore</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard" className={navLinkClass}>
+                                    <span className="flex items-center gap-1.5"><FaChartBar size={14} /> Dashboard</span>
+                                </NavLink>
+                            </li>
+                            <li><SearchBar /></li>
+                            <li>
+                                <NavLink to="/wallet" className={navLinkClass}>
+                                    <span className="flex items-center gap-1.5">
+                                        <FaWallet size={14} />
+                                        <span className="tabular-nums">₹{parseFloat(data.balance).toFixed(2)}</span>
+                                    </span>
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
+                    <li>
+                        {token ? (
+                            <NavLink to="/logout" className="border border-mercury-700 hover:border-mercury-500 text-mercury-300 hover:text-mercury-100 px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-1.5">
+                                <FaSignOutAlt size={13} /> Logout
+                            </NavLink>
+                        ) : (
+                            <NavLink to="/login" className="bg-accent-500 hover:bg-accent-600 text-mercury-100 px-5 py-1.5 rounded-lg text-sm font-bold transition-colors duration-200 flex items-center gap-1.5">
+                                <FaSignInAlt size={13} /> Login
+                            </NavLink>
+                        )}
+                    </li>
+                </ul>
 
-              <li>
-                <SearchBar />
-              </li>
-
-              <li>
-                <NavLink
-                  to="/wallet"
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'text-san-marino-400 opacity-100'
-                      : 'navbar-link opacity-50 hover:opacity-100 transition-all duration-300 ease-in-out'
-                  }
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="flex items-center space-x-2">
-                    <FaWallet />
-                    <span className="text-mercury-200">₹{parseFloat(data.balance).toFixed(2)}</span>
-                  </div>
-                </NavLink>
-              </li>
-            </>
-          )}
-          <li>
-            <NavLink
-              to={token ? '/logout' : '/login'}
-              className={({ isActive }) =>
-                isActive
-                  ? 'text-san-marino-400 opacity-100'
-                  : 'navbar-link opacity-50 hover:opacity-100 transition-all duration-300 ease-in-out'
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              {token ? 'Logout' : 'Login'}
-            </NavLink>
-          </li>
-        </ul>
-      </div>
-    </nav>
+                {/* Mobile nav */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.ul variants={menuVariants} initial="closed" animate="open" exit="closed" className="md:hidden flex flex-col w-full space-y-4 pt-4 pb-2 text-base font-semibold overflow-hidden">
+                            {token && (
+                                <>
+                                    <li><NavLink to="/explore" className={navLinkClass}><span className="flex items-center gap-2"><FaCompass size={16} /> Explore</span></NavLink></li>
+                                    <li><NavLink to="/dashboard" className={navLinkClass}><span className="flex items-center gap-2"><FaChartBar size={16} /> Dashboard</span></NavLink></li>
+                                    <li><SearchBar /></li>
+                                    <li><NavLink to="/wallet" className={navLinkClass}><span className="flex items-center gap-2"><FaWallet size={16} /> <span className="tabular-nums">₹{parseFloat(data.balance).toFixed(2)}</span></span></NavLink></li>
+                                </>
+                            )}
+                            <li>
+                                {token ? (
+                                    <NavLink to="/logout" className="border border-mercury-700 text-mercury-300 px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 w-fit">
+                                        <FaSignOutAlt size={14} /> Logout
+                                    </NavLink>
+                                ) : (
+                                    <NavLink to="/login" className="bg-accent-500 text-mercury-100 px-5 py-2 rounded-lg text-sm font-bold flex items-center gap-2 w-fit">
+                                        <FaSignInAlt size={14} /> Login
+                                    </NavLink>
+                                )}
+                            </li>
+                        </motion.ul>
+                    )}
+                </AnimatePresence>
+            </div>
+        </nav>
     )
 }
 

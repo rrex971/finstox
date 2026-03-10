@@ -15,7 +15,7 @@ const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
-            <div className="bg-woodsmoke-800 border border-woodsmoke-700 rounded-lg px-3 py-2 text-sm">
+            <div className="bg-woodsmoke-800 border border-woodsmoke-700 rounded-xl px-3 py-2 text-sm">
                 <p className="text-mercury-200 font-semibold">{data.feature}</p>
                 <p className={`${data.weight >= 0 ? 'text-emerald-400' : 'text-amaranth-400'}`}>
                     Weight: {data.weight >= 0 ? '+' : ''}{data.weight.toFixed(4)}
@@ -46,7 +46,7 @@ const LIMEChart = ({ limeData }) => {
 
     return (
         <div className="w-full">
-            <div className="text-sm text-mercury-300 mb-3 bg-woodsmoke-950 p-3 rounded-lg border border-woodsmoke-800">
+            <div className="text-sm text-mercury-300 mb-3 bg-woodsmoke-950 p-3 rounded-xl border border-woodsmoke-800">
                 <strong className="text-mercury-100 block mb-1">Specific Decision Breakdown:</strong>
                 Exactly how much each technical indicator contributed to making <em className="text-mercury-100 font-medium">this exact</em> 7-day prediction.
             </div>
@@ -54,22 +54,22 @@ const LIMEChart = ({ limeData }) => {
                 <BarChart
                     data={chartData}
                     layout="vertical"
-                    margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
+                    margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#4f4f4f" horizontal={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#353535" horizontal={false} />
                     <XAxis
                         type="number"
-                        tick={{ fill: '#adadad', fontSize: 12 }}
-                        axisLine={{ stroke: '#4f4f4f' }}
-                        tickLine={{ stroke: '#4f4f4f' }}
+                        tick={{ fill: '#adadad', fontSize: 11 }}
+                        axisLine={{ stroke: '#353535' }}
+                        tickLine={{ stroke: '#353535' }}
                     />
                     <YAxis
                         type="category"
                         dataKey="feature"
-                        tick={{ fill: '#e0e0e0', fontSize: 12 }}
-                        axisLine={{ stroke: '#4f4f4f' }}
+                        tick={{ fill: '#e0e0e0', fontSize: 11 }}
+                        axisLine={{ stroke: '#353535' }}
                         tickLine={false}
-                        width={95}
+                        width={70}
                     />
                     <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(255,255,255,0.05)' }} />
                     <ReferenceLine x={0} stroke="#7b7b7b" strokeDasharray="3 3" />
@@ -86,12 +86,12 @@ const LIMEChart = ({ limeData }) => {
                 <div className="mt-4 flex items-center space-x-3">
                     <div className="text-sm text-mercury-300 font-medium">Explanation Accuracy (Trust Score):</div>
                     <div className="flex items-center space-x-2">
-                        <div className="w-32 h-2 bg-woodsmoke-700 rounded-full overflow-hidden">
+                        <div className="w-32 h-2 bg-woodsmoke-800 rounded-full overflow-hidden">
                             <div
                                 className="h-full rounded-full transition-all duration-500"
                                 style={{
                                     width: `${Math.min(fidelity_score * 100, 100)}%`,
-                                    background: `linear-gradient(90deg, #658fcb, #52dd92)`,
+                                    background: `#52dd92`,
                                 }}
                             />
                         </div>

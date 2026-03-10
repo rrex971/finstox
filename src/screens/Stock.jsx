@@ -9,6 +9,7 @@ import XAIExplanation from "../components/XAIExplanation";
 import PredictionChart from "../components/PredictionChart";
 import { motion } from "motion/react";
 import { NinetyRingWithBg } from "react-svg-spinners";
+import { FaGlobe, FaIndustry, FaBrain } from "react-icons/fa";
 import API_BASE from "../apiConfig";
 
 // Generate mock XAI data based on the paper's documented feature importance (Table II)
@@ -131,7 +132,7 @@ const Stock = () => {
     }
 
     return (
-        <div className="flex flex-col md:flex-row md:space-x-16 pb-8 md:mx-16 justify-between h-fit min-h-lvh font-body">
+        <div className="flex flex-col md:flex-row md:space-x-16 pb-8 px-6 md:px-12 lg:px-16 xl:px-24 justify-between h-fit min-h-lvh font-body">
             {(buyDialogOpen || sellDialogOpen) && (
                 <motion.div
                     className="absolute w-full h-full top-0 left-0 bluroverlay backdrop-blur-sm"
@@ -142,7 +143,7 @@ const Stock = () => {
                 >
                 </motion.div>
             )}
-            <div className="flex-col w-full px-4 md:px-0 py-8 md:py-12">
+            <div className="flex-col w-full py-8 md:py-12">
                 <div className="flex align-center">
                     <div className="imagecontainer flex justify-center items-center bg-woodsmoke-700 w-fit h-fit rounded-lg mr-4 md:mr-8">
                         <img className="w-16 md:w-24 contain rounded-lg" src={`${API_BASE}/logos/${stock.symbol}.jpg`} alt="Stock Logo" />
@@ -152,14 +153,14 @@ const Stock = () => {
                             <div className="font-semibold stockname text-xl md:text-4xl text-mercury-200">
                                 {stock.name}
                             </div>
-                            <div className="stocksymbol text-md md:text-lg font-bold text-mercury-400 my-2 md:my-0 md:mx-4 border border-woodsmoke-700 rounded-xl px-2">
+                            <div className="stocksymbol font-mono text-md md:text-lg font-semibold tracking-wide text-mercury-400 my-2 md:my-0 md:mx-4 border border-woodsmoke-700 rounded-xl px-2">
                                 {stock.symbol}
                             </div>
                         </div>
-                        <div className="stockprice text-lg md:text-2xl text-mercury-400">
+                        <div className="stockprice text-lg md:text-2xl text-mercury-400 tabular-nums">
                             {(Math.round(stock.price * 100) / 100).toFixed(2)}&nbsp;INR&nbsp;
                         </div>
-                        <div className={`onedaychange text-md md:text-xl mb-12 ${stock.positive ? "text-emerald-400" : "text-amaranth-500"}`}>
+                        <div className={`onedaychange text-md md:text-xl mb-12 tabular-nums ${stock.positive ? "text-emerald-400" : "text-amaranth-500"}`}>
                             {stock.positive ? "+" : "-"}
                             {(Math.round(stock.onedaychange * 100) / 100).toFixed(2)}
                             &nbsp;INR&nbsp;
@@ -172,44 +173,42 @@ const Stock = () => {
                     <TradingViewWidget symbol={symbol} />
                 </div>
             </div>
-            <div className="sidebar w-full md:w-1/2 px-4 md:px-0 md:py-12 flex-col space-y-4 font-body font-bold">
+            <div className="sidebar w-full md:w-1/2 md:py-12 flex-col space-y-4 font-body font-bold">
                 <div
-                    className="buybutton bg-gradient-to-br from-emerald-400 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:via-emerald-600 hover:to-emerald-700 text-3xl text-mercury-200 rounded-lg flex justify-center py-6 transition-colors duration-300
-                                hover:bg-emerald-600"
+                    className="buybutton bg-gradient-to-br from-emerald-400 via-emerald-500 to-emerald-600 hover:from-emerald-500 hover:via-emerald-600 hover:to-emerald-700 text-3xl text-mercury-200 rounded-xl flex justify-center py-6 transition-colors duration-200 cursor-pointer font-semibold"
                     onClick={() => setBuyDialogOpen(true)}
                 >
                     Buy
                 </div>
                 <div
-                    className="sellbutton bg-gradient-to-br from-amaranth-400 via-amaranth-500 to-amaranth-600 hover:from-amaranth-500 hover:via-amaranth-600 hover:to-amaranth-700 text-3xl text-mercury-200 rounded-lg flex justify-center py-6 transition-colors duration-300
-                                hover:bg-amaranth-600"
+                    className="sellbutton bg-gradient-to-br from-amaranth-400 via-amaranth-500 to-amaranth-600 hover:from-amaranth-500 hover:via-amaranth-600 hover:to-amaranth-700 text-3xl text-mercury-200 rounded-xl flex justify-center py-6 transition-colors duration-200 cursor-pointer font-semibold"
                     onClick={() => setSellDialogOpen(true)}
                 >
                     Sell
                 </div>
-                <div className="h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col space-y-4 py-4 px-4">
+                <div className="h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-800 rounded-xl flex flex-col space-y-4 py-4 px-4">
                     <div className="website-info">
-                        <span className="block text-xl text-mercury-200">Website</span>
-                        <span className="block text-lg text-mercury-400 underline">
+                        <span className="flex items-center gap-2 text-xl text-mercury-200"><FaGlobe className="text-accent-400" /> Website</span>
+                        <span className="block text-lg text-mercury-400 underline pl-7">
                             <a href={`https://${stock.website}`}>{stock.website}</a>
                         </span>
                     </div>
                     <div className="industry-info">
-                        <span className="block text-xl text-mercury-200">Industry</span>
-                        <span className="block text-lg text-mercury-400">
+                        <span className="flex items-center gap-2 text-xl text-mercury-200"><FaIndustry className="text-accent-400" /> Industry</span>
+                        <span className="block text-lg text-mercury-400 pl-7">
                             {stock.industry}
                         </span>
                     </div>
                 </div>
-                <div className={`mt-4 w-full h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col space-y-4 py-4 px-4 ${fetchingPrediction ? "justify-center items-center" : ""}`}>
+                <div className={`mt-4 w-full h-fit text-mercury-200 text-xl bg-woodsmoke-900 border border-woodsmoke-800 rounded-xl flex flex-col space-y-4 py-4 px-4 ${fetchingPrediction ? "justify-center items-center" : ""}`}>
                     {!showPrediction ? (
                         fetchingPrediction ? (
                             <NinetyRingWithBg className="my-4" width="50" height="50" color="#FFFFFF" />
                         ) : (
-                            <div className="get-prediction-button shadow-xl shadow-woodsmoke-700/50 hover:shadow-fuchsia-600/30 bg-mercury-200 hover:bg-gradient-to-br hover:from-fuchsia-500 hover:to-san-marino-500 border border-woodsmoke-700 text-xl text-san-marino-500 hover:text-mercury-200 rounded-lg px-4 py-2 my-2 transition-colors duration-300 cursor-pointer"
+                            <div className="get-prediction-button bg-gradient-to-br from-accent-400 via-accent-500 to-accent-600 hover:from-accent-500 hover:via-accent-600 hover:to-accent-700 text-xl text-mercury-200 rounded-xl px-4 py-3 my-2 transition-all duration-200 cursor-pointer text-center font-semibold flex items-center justify-center gap-2"
                                 onClick={fetchPredictionData}
                             >
-                                Get AI Prediction
+                                <FaBrain /> Get AI Prediction
                             </div>
                         )
                     ) : (
@@ -227,7 +226,7 @@ const Stock = () => {
                             </div>
                             <div className="forecast-price">
                                 <span className="block text-xl text-mercury-200">7-day Forecast</span>
-                                <div className="flex space-x-1 flex-wrap text-sm pt-2">
+                                <div className="flex space-x-1 flex-wrap text-sm pt-2 tabular-nums">
                                     {predictionData.predicted_prices.map((price, index) => (
                                         <div key={index} className="flex py-1 px-1 mb-1 items-center justify-center w-18 rounded-sm border border-woodsmoke-700">
                                             <span className="text-center w-full">{price.toFixed(2)}</span>

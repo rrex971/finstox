@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router';
+import { Routes, Route, useLocation, Navigate } from 'react-router';
 import Navbar from './components/Navbar';
 import Home from './screens/Home'
 import SearchResults from './screens/SearchResults';
@@ -38,7 +38,7 @@ const App = () => {
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={localStorage.getItem('token') ? <Navigate to="/explore" replace /> : <Home />} />
             <Route path="/search" element={<SearchResults />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/dashboard" element={<Dashboard />} />

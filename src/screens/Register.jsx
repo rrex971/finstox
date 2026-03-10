@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
+import { FaUserPlus, FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import transition from '../transition';
 import API_BASE from '../apiConfig';
 
@@ -77,49 +78,49 @@ const Register = (props) => {
   return (
     <div className="flex justify-center font-body items-center min-h-screen">
       <form onSubmit={handleSubmit}>
-        <div className="w-96 bg-woodsmoke-950 border text-mercury-200 border-woodsmoke-700 p-8 rounded-xl shadow-xl text-center">
-          <h2 className="text-3xl font-bold text-woodsmoke-100 mb-4">Register a new Finstox Account</h2>
+        <div className="w-96 bg-woodsmoke-950 border text-mercury-200 border-woodsmoke-800 p-8 rounded-xl shadow-xl text-center">
+          <h2 className="text-3xl font-bold text-woodsmoke-100 mb-4"><FaUserPlus className="inline mr-2 text-accent-400" />Register</h2>
           {error && <p className="text-red-500">{error}</p>}
           {success && <p className="text-green-500">{success}</p>}
           <div className="mt-4">
-            <label className="block text-woodsmoke-300 font-semibold pb-2">Username</label>
+            <label className="flex items-center gap-1.5 text-woodsmoke-300 font-semibold pb-2"><FaUser className="text-xs" /> Username</label>
             <input
               type="text"
-              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
               value={uname}
               onChange={(e) => setUName(e.target.value)}
             />
           </div>
           <div className="mt-4">
-            <label className="block text-woodsmoke-300 font-semibold pb-2">Email</label>
+            <label className="flex items-center gap-1.5 text-woodsmoke-300 font-semibold pb-2"><FaEnvelope className="text-xs" /> Email</label>
             <input
               type="email"
-              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mt-4">
-            <label className="block text-woodsmoke-300 font-semibold pb-2">Password</label>
+            <label className="flex items-center gap-1.5 text-woodsmoke-300 font-semibold pb-2"><FaLock className="text-xs" /> Password</label>
             <input
               type="password"
-              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="mt-4">
-            <label className="block text-woodsmoke-300 font-semibold pb-2">Confirm Password</label>
+            <label className="flex items-center gap-1.5 text-woodsmoke-300 font-semibold pb-2"><FaLock className="text-xs" /> Confirm Password</label>
             <input
               type="password"
-              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-500"
+              className="w-full px-4 py-3 border border-woodsmoke-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="flex items-center justify-center space-x-3">
             <button
-              className="w-full mt-6 py-3 border-transparent text-mercury-200 bg-gradient-to-br from-fuchsia-500 to-san-marino-500 rounded-lg text-lg border font-semibold transition-all duration-300 hover:bg-woodsmoke-900 hover:bg-none hover:text-fuchsia-500 hover:border-fuchsia-500"
+              className="w-full mt-6 py-3 text-mercury-200 bg-accent-500 hover:bg-accent-600 rounded-xl text-lg font-semibold transition-colors duration-200 cursor-pointer"
               type="submit"
             >
               Register
