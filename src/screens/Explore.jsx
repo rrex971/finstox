@@ -4,6 +4,7 @@ import ExploreStock from "../components/ExploreStock";
 import { Link } from "react-router";
 import ExplorePanel from "../components/ExplorePanel";
 import LoadingScreen from "./LoadingScreen";
+import API_BASE from "../apiConfig";
 
 const Explore = () => {
     const [data1, setData1] = useState({});
@@ -15,7 +16,7 @@ const Explore = () => {
         let cancel = false;
         let timer = null;
         const fetchTopGainers = async () => {
-            const response = await fetch(`https://finapi.rrex.cc/getTopGainers`);
+            const response = await fetch(`${API_BASE}/getTopGainers`);
             const data = await response.json();
             if (!cancel) {
                 setData1(data);
@@ -23,7 +24,7 @@ const Explore = () => {
             }
         }
         const fetchTopLosers = async () => {
-            const response = await fetch(`https://finapi.rrex.cc/getTopLosers`);
+            const response = await fetch(`${API_BASE}/getTopLosers`);
             const data = await response.json();
             if (!cancel) {
                 setData2(data);
@@ -35,17 +36,17 @@ const Explore = () => {
             await fetchTopLosers();
         }
         apiCall();
-        fetch("https://finapi.rrex.cc/isMarketOpen")
+        fetch(`${API_BASE}/isMarketOpen`)
             .then(response => response.text())
             .then(data => {
-                if(data === "true") {
+                if (data === "true") {
                     timer = setInterval(apiCall, 10000);
                     setLiveTimeout(timer);
                 }
             });
         return () => {
             cancel = true;
-            if(timer) {
+            if (timer) {
                 clearInterval(timer);
             }
         }
@@ -55,13 +56,13 @@ const Explore = () => {
     }, [liveTimeout]);
     return (
         <div className="h-fit min-h-screen text-xl flex flex-col md:flex-row justify-evenly font-body pt-8 md:pt-24">
-            {loading1 || loading2 ? <LoadingScreen /> : 
-            <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 mb-24">
-                <ExplorePanel title="Top Gainers" data={data1} />
-                <ExplorePanel title="Top Losers" data={data2} />
-            </div>
-        }
-            
+            {loading1 || loading2 ? <LoadingScreen /> :
+                <div className="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8 mb-24">
+                    <ExplorePanel title="Top Gainers" data={data1} />
+                    <ExplorePanel title="Top Losers" data={data2} />
+                </div>
+            }
+
         </div>
     )
 }

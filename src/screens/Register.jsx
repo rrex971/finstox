@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import transition from '../transition';
+import API_BASE from '../apiConfig';
 
 const Register = (props) => {
   const [uname, setUName] = useState('');
@@ -36,7 +37,7 @@ const Register = (props) => {
     const sendData = JSON.stringify(formdata);
 
     try {
-      const response = await fetch(`https://finapi.rrex.cc/register`, {
+      const response = await fetch(`${API_BASE}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ const Register = (props) => {
 
   const checkUsernameAvailability = async (username) => {
     try {
-      const response = await fetch(`https://finapi.rrex.cc/checkUsername?query=${username}`);
+      const response = await fetch(`${API_BASE}/checkUsername?query=${username}`);
       const data = await response.json();
       if (response.ok) {
         return true;

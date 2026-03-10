@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router';
 import { FaHamburger, FaWallet } from "react-icons/fa";
 import SearchBar from './SearchBar';
 import GlobalContext from '../GlobalContext';
+import API_BASE from '../apiConfig';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Navbar = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
         
         const username = localStorage.getItem('username')
         if (username) {
-            fetch(`https://finapi.rrex.cc/getWallet?username=${username}`)
+            fetch(`${API_BASE}/getWallet?username=${username}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);

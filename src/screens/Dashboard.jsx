@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import DashboardStock from "../components/DashboardStock";
 import LoadingScreen from "./LoadingScreen";
+import API_BASE from "../apiConfig";
 
 const Dashboard = () => {
     const [holdings, setHoldings] = useState({});
@@ -10,14 +11,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchHoldings = async () => {
-            const response = await fetch(`https://finapi.rrex.cc/getHoldings?username=${localStorage.getItem("username")}`);
+            const response = await fetch(`${API_BASE}/getHoldings?username=${localStorage.getItem("username")}`);
             const data = await response.json();
             setHoldings(data);
             setLoading(false);
         }
         fetchHoldings();
     }, []);
-    if(loading) {
+    if (loading) {
         return <LoadingScreen />
     }
     return (
@@ -52,12 +53,12 @@ const Dashboard = () => {
                 <div className="w-11/12 md:w-5/6  text-mercury-200 bg-woodsmoke-900 border border-woodsmoke-700 rounded-xl flex flex-col py-4 md:py-16 px-4 md:px-16">
                     <div className="font-bold text-4xl mb-4 md:mb-12">Holdings</div>
                     <div className="stocks flex flex-col divide-y divide-woodsmoke-700">
-                    { holdings.holdings.length !== 0 ?
-                        holdings.holdings.map(stock => (
-                            <Link to={`/stock/${stock.symbol}`}><DashboardStock key={stock.symbol} data={stock} /></Link>
-                        )) : 
-                        <div className="text-xl italic text-mercury-800">No stock holdings</div>
-                    }
+                        {holdings.holdings.length !== 0 ?
+                            holdings.holdings.map(stock => (
+                                <Link to={`/stock/${stock.symbol}`}><DashboardStock key={stock.symbol} data={stock} /></Link>
+                            )) :
+                            <div className="text-xl italic text-mercury-800">No stock holdings</div>
+                        }
                     </div>
                 </div>
             </div>

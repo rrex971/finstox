@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-
+import API_BASE from "../apiConfig";
 import { motion } from "framer-motion";
 import { FaX } from "react-icons/fa6";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
   const username = localStorage.getItem("username");
   useEffect(() => {
     if(open) {
-      fetch(`https://finapi.rrex.cc/getQtyOwned?username=${username}&symbol=${symbol}`)
+      fetch(`${API_BASE}/getQtyOwned?username=${username}&symbol=${symbol}`)
         .then(response => response.json())
         .then(data => setQuantity(data.quantity));
     }
@@ -37,7 +37,7 @@ const BuyDialog = ({ open, onClose, symbol, price }) => {
         toast.error("Please enter a valid quantity");
         return;
       }
-      fetch(`https://finapi.rrex.cc/buy`, {
+      fetch(`${API_BASE}/buy`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
