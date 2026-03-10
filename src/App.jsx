@@ -13,7 +13,7 @@ import Login from './screens/Login';
 import Logout from './screens/Logout';
 import { AnimatePresence } from 'framer-motion';
 import Register from './screens/Register';
-import XAITest from './screens/XAITest';
+// import XAITest from './screens/XAITest';
 import GlobalContext from './GlobalContext';
 import { ToastContainer, Slide } from 'react-toastify';
 
@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/register" element={<Register />} />
             <Route path="/stock/:symbol" element={<Stock />} />
-            <Route path="/xai-test" element={<XAITest />} />
+            {/* <Route path="/xai-test" element={<XAITest />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
