@@ -42,7 +42,7 @@ const SectorPanel = ({ sector }) => {
 
     return (
         <div className="h-fit w-full text-mercury-200">
-            <div className="font-bold text-lg mb-1.5 flex items-center gap-2">
+            <div className="font-bold text-lg md:text-xl mb-1.5 flex items-center gap-2">
                 <FaIndustry className="text-accent-400 text-sm" />
                 {sector.label}
             </div>
